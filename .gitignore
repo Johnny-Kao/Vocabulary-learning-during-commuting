@@ -1,0 +1,5 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+old/
+vocab_mobile_demo_20_v8.html

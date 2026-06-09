@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <title>通勤单词</title>
+  <style>
+    :root {
+      --bg:      #f2f2ef;
+      --card:    #ffffff;
+      --ink:     #18181b;
+      --ink-2:   #52525b;
+      --muted:   #a1a1aa;
+      --line:    #e4e4e7;
+      --ok:      #16a34a;
+      --ok-bg:   #f0fdf4;
+      --blue:    #2563eb;
+      --shadow:  0 0 0 1px rgba(0,0,0,.03), 0 4px 12px rgba(0,0,0,.06), 0 20px 48px rgba(0,0,0,.08);
+      --radius:  24px;
+      --tab-h:   calc(70px + env(safe-area-inset-bottom));
+    }
+    * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; margin:0; padding:0; }
+    html, body { height:100%; }
+    body {
+      max-width:480px; margin:0 auto;
+      background:var(--bg); color:var(--ink);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans SC","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    /* ── Shell ──────────────────────────────────────────────────────── */
+    .shell { height:100dvh; display:flex; flex-direction:column; padding-bottom:var(--tab-h); }
+
+    /* ── Header ─────────────────────────────────────────────────────── */
+    header {
+      flex:0 0 auto;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 20px 8px; gap:12px;
+    }
+    .title-block .title  { font-size:18px; font-weight:800; letter-spacing:-.03em; }
+    .title-block .subtitle { font-size:12px; color:var(--muted); margin-top:2px; font-weight:600; }
+
+    /* Segmented control — iOS-style */
+    .lang-switch { display:flex; gap:2px; padding:3px; background:#e4e4e7; border-radius:999px; }
+    .lang-pill {
+      border:0; background:transparent; color:var(--muted);
+      border-radius:999px; padding:6px 11px;
+      display:flex; align-items:center; gap:5px;
+      font-weight:700; font-size:13px; min-height:34px; cursor:pointer;
+      transition:background .15s, color .15s, box-shadow .15s;
+    }
+    .lang-pill.active { background:#fff; color:var(--ink); box-shadow:0 1px 4px rgba(0,0,0,.14); }
+    .flag { width:18px; height:18px; border-radius:50%; overflow:hidden; flex:0 0 18px; box-shadow:inset 0 0 0 1px rgba(0,0,0,.1); }
+    .flag-fr { background:linear-gradient(90deg,#0055a4 0 33.33%,#fff 33.33% 66.66%,#ef4135 66.66% 100%); }
+    .flag-de { background:linear-gradient(180deg,#000 0 33.33%,#dd0000 33.33% 66.66%,#ffce00 66.66% 100%); }
+
+    /* ── Progress ────────────────────────────────────────────────────── */
+    .progress-row { flex:0 0 auto; padding:0 20px 12px; }
+    .progress-meta { display:flex; justify-content:space-between; color:var(--muted); font-size:11px; font-weight:700; margin-bottom:5px; }
+    .bar { height:4px; border-radius:999px; background:#d4d4d8; overflow:hidden; }
+    .bar > i { display:block; height:100%; width:0%; border-radius:999px; background:linear-gradient(90deg,#3b82f6,#8b5cf6); transition:width .4s cubic-bezier(.4,0,.2,1); }
+
+    /* ── Panels ──────────────────────────────────────────────────────── */
+    .panel { display:none; flex:1; overflow:hidden; }
+    .panel.active { display:flex; flex-direction:column; }
+    #learnPanel { padding:0 16px 10px; }
+
+    /* ── Main card ───────────────────────────────────────────────────── */
+    .card {
+      flex:1; background:#fff; border-radius:var(--radius);
+      box-shadow:var(--shadow); padding:18px 20px 16px;
+      display:flex; flex-direction:column; overflow:hidden;
+    }
+    .card-top { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:14px; flex:0 0 auto; }
+    .cat-pill {
+      background:#f4f4f5; border-radius:999px; padding:4px 11px;
+      font-size:12px; font-weight:700; color:var(--ink-2);
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:68%;
+    }
+    .counter { font-size:12px; font-weight:700; color:var(--muted); flex:0 0 auto; }
+
+    /* ── Card fields ─────────────────────────────────────────────────── */
+    .card-fields { flex:1; display:flex; flex-direction:column; gap:10px; min-height:0; }
+
+    /* Reference row — no box, just two-column text */
+    .fields-ref { display:grid; grid-template-columns:1fr 1fr; gap:12px; flex:0 0 auto; }
+    .ref-item { display:flex; flex-direction:column; gap:3px; }
+
+    /* Target area — language-tinted panel, label pinned top-left, word centered */
+    .fields-target {
+      flex:1; border-radius:18px; padding:16px 20px;
+      display:flex; align-items:center; justify-content:center;
+      min-height:0; position:relative;
+      background:#eef3ff; transition:background .25s ease;
+    }
+    body[data-lang="de"] .fields-target { background:#fffbeb; }
+    #targetLabel { position:absolute; top:14px; left:18px; }
+
+    .label { font-size:10px; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); font-weight:800; }
+    .zh     { font-size:24px; line-height:1.2; letter-spacing:-.03em; font-weight:900; }
+    .en     { font-size:14px; line-height:1.3; letter-spacing:-.01em; font-weight:600; color:var(--ink-2); }
+    .target { font-size:44px; line-height:1.1; letter-spacing:-.04em; font-weight:950; text-align:center; }
+
+    /* ── Card footer ─────────────────────────────────────────────────── */
+    .card-footer { flex:0 0 auto; margin-top:12px; display:flex; flex-direction:column; gap:8px; }
+    .actions { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+
+    .btn-speak {
+      border:0; border-radius:16px; padding:14px 12px;
+      font-weight:800; font-size:15px; min-height:52px;
+      background:var(--blue); color:#fff;
+      cursor:pointer; letter-spacing:-.01em;
+      transition:transform .1s, opacity .1s;
+    }
+    .btn-speak:active { transform:scale(.97); opacity:.9; }
+
+    .btn-known {
+      border:2px solid var(--line); border-radius:16px; padding:14px 12px;
+      font-weight:800; font-size:15px; min-height:52px;
+      background:transparent; color:var(--ink-2); cursor:pointer;
+      transition:background .15s, border-color .15s, color .15s, transform .1s;
+    }
+    .btn-known.on  { background:var(--ok); border-color:var(--ok); color:#fff; }
+    .btn-known.bump { animation:bump .2s ease; }
+    @keyframes bump { 0%,100%{transform:scale(1)} 50%{transform:scale(.96)} }
+
+    .nav-row { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+    .btn-nav {
+      border:1.5px solid var(--line); border-radius:13px; padding:10px;
+      min-height:42px; background:transparent; color:var(--ink-2);
+      font-size:14px; font-weight:700; cursor:pointer;
+      transition:background .12s, border-color .12s;
+    }
+    .btn-nav:active { background:#f4f4f5; border-color:#d1d5db; }
+
+    /* ── Card animation ──────────────────────────────────────────────── */
+    @keyframes slide-in-r { from{transform:translateX(20px);opacity:.5} to{transform:translateX(0);opacity:1} }
+    @keyframes slide-in-l { from{transform:translateX(-20px);opacity:.5} to{transform:translateX(0);opacity:1} }
+    .card.anim-right { animation:slide-in-r .2s cubic-bezier(.25,.46,.45,.94) both; }
+    .card.anim-left  { animation:slide-in-l .2s cubic-bezier(.25,.46,.45,.94) both; }
+
+    /* ── Scrollable panels ───────────────────────────────────────────── */
+    #categoryPanel,#knownPanel,#quizPanel {
+      overflow-y:auto; -webkit-overflow-scrolling:touch; padding:8px 16px 12px;
+    }
+    .list-card {
+      background:#fff; border-radius:18px; padding:2px 16px; margin-bottom:10px;
+      box-shadow:0 1px 3px rgba(0,0,0,.04),0 6px 20px rgba(0,0,0,.06);
+    }
+    .section-header {
+      font-size:11px; font-weight:800; color:var(--muted);
+      letter-spacing:.1em; text-transform:uppercase; padding:14px 2px 6px;
+    }
+    .list-row {
+      display:flex; justify-content:space-between; gap:12px; align-items:center;
+      padding:13px 2px; border-bottom:1px solid #f4f4f5; cursor:pointer;
+    }
+    .list-row:last-child { border-bottom:0; }
+    .list-row:active { opacity:.65; }
+    .list-main b    { display:block; font-size:15px; font-weight:700; margin-bottom:2px; }
+    .list-main span { color:var(--muted); font-size:12px; }
+    .list-stat { color:var(--ink); font-weight:800; font-size:13px; white-space:nowrap; }
+
+    /* ── Search ──────────────────────────────────────────────────────── */
+    .search-wrap { position:sticky; top:0; z-index:10; background:var(--bg); padding:2px 0 10px; }
+    .search-input {
+      width:100%; border:1.5px solid var(--line); border-radius:14px;
+      padding:11px 16px 11px 40px; font-size:15px; font-weight:600;
+      background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23a1a1aa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='7' cy='7' r='5'/%3E%3Cline x1='11' y1='11' x2='15' y2='15'/%3E%3C/svg%3E") no-repeat 14px center;
+      color:var(--ink); outline:none; -webkit-appearance:none; appearance:none;
+      transition:border-color .15s, box-shadow .15s;
+    }
+    .search-input:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(37,99,235,.1); }
+    .search-input::placeholder { color:var(--muted); font-weight:500; }
+
+    /* ── Quiz ────────────────────────────────────────────────────────── */
+    .quiz-card {
+      background:#fff; border-radius:20px; box-shadow:var(--shadow); padding:22px; margin-bottom:10px;
+    }
+    .quiz-q   { font-size:26px; font-weight:950; margin:6px 0 2px; line-height:1.2; }
+    .quiz-sub { color:var(--muted); font-size:14px; font-weight:600; margin-bottom:18px; }
+    .option {
+      width:100%; border:1.5px solid var(--line); background:#fff; border-radius:14px;
+      padding:14px 16px; text-align:left; font-size:16px; font-weight:700; margin:6px 0;
+      cursor:pointer; transition:background .1s, border-color .1s, transform .08s;
+    }
+    .option:active  { background:#f8f8f7; transform:scale(.99); }
+    .option.correct { border-color:#4ade80; background:#f0fdf4; color:#15803d; }
+    .option.wrong   { border-color:#fca5a5; background:#fef2f2; color:#b91c1c; }
+    .small-btn {
+      border:0; border-radius:13px; padding:13px 20px;
+      background:var(--ink); color:#fff; font-weight:800; font-size:15px;
+      cursor:pointer; margin-top:12px; letter-spacing:-.01em; display:inline-block;
+    }
+    .muted { color:var(--muted); }
+
+    /* ── Tabs ────────────────────────────────────────────────────────── */
+    .tabs {
+      position:fixed; left:50%; transform:translateX(-50%); bottom:0;
+      width:min(480px,100%); padding:10px 14px calc(12px + env(safe-area-inset-bottom));
+      background:rgba(242,242,239,.95); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+      border-top:1px solid rgba(228,228,231,.7);
+      display:grid; grid-template-columns:repeat(4,1fr); gap:6px; z-index:20;
+    }
+    .tab {
+      border:0; border-radius:13px; padding:8px 4px;
+      background:transparent; color:var(--muted);
+      cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:2px;
+      transition:background .12s, color .12s;
+    }
+    .tab .tab-icon  { font-size:21px; line-height:1; }
+    .tab .tab-label { font-size:10px; font-weight:700; letter-spacing:.01em; }
+    .tab.active { background:var(--ink); color:#fff; }
+
+    /* ── Loading ─────────────────────────────────────────────────────── */
+    .loading-screen { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100dvh; gap:16px; }
+    .spinner { width:32px; height:32px; border:3px solid #d4d4d8; border-top-color:var(--ink); border-radius:50%; animation:spin .7s linear infinite; }
+    @keyframes spin { to{transform:rotate(360deg)} }
+
+    /* ── Toast ───────────────────────────────────────────────────────── */
+    .toast {
+      position:fixed; left:50%; bottom:calc(var(--tab-h) + 10px);
+      transform:translateX(-50%) translateY(14px); opacity:0;
+      background:var(--ink); color:#fff; padding:10px 18px;
+      border-radius:999px; font-weight:700; font-size:14px;
+      transition:all .18s ease; z-index:50; pointer-events:none; white-space:nowrap;
+    }
+    .toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
+
+    /* ── Confetti ────────────────────────────────────────────────────── */
+    .confetti-overlay { position:fixed; inset:0; pointer-events:none; z-index:999; overflow:hidden; }
+    .confetti-dot { position:absolute; top:-20px; width:9px; height:9px; border-radius:2px; animation:confetti-fall linear forwards; }
+    @keyframes confetti-fall {
+      0%   { transform:translateY(0) rotate(0deg); opacity:1; }
+      80%  { opacity:1; }
+      100% { transform:translateY(110vh) rotate(720deg); opacity:0; }
+    }
+
+    /* ── Responsive ──────────────────────────────────────────────────── */
+    @media (max-height:700px) {
+      .zh     { font-size:20px; }
+      .en     { font-size:13px; }
+      .target { font-size:36px; }
+      .fields-target { padding:12px 16px; border-radius:14px; }
+      #targetLabel { top:11px; left:14px; }
+      .btn-speak, .btn-known { min-height:48px; padding:12px; font-size:14px; }
+      .btn-nav { min-height:38px; font-size:13px; }
+    }
+    @media (max-width:360px) {
+      header,#learnPanel { padding-left:14px; padding-right:14px; }
+      .target { font-size:38px; }
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="card-audio" playsinline preload="none"></audio>
+  <div id="toast" class="toast"></div>
+
+  <div id="root">
+    <div class="loading-screen">
+      <div class="spinner"></div>
+      <div style="color:var(--muted);font-weight:700;font-size:14px">加载词表…</div>
+    </div>
+  </div>
+
+  <script>
+    let VOCAB = [];
+
+    (function () {
+      const p = new URLSearchParams(location.search);
+      const host = location.hostname;
+      const lang = (location.pathname.includes('/de') || p.get('lang') === 'de' || host.startsWith('de')) ? 'de' : 'fr';
+      fetch('vocab.json')
+        .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(data => { VOCAB = data; initApp(lang); })
+        .catch(() => {
+          document.getElementById('root').innerHTML =
+            '<div class="loading-screen"><p style="color:#52525b;font-weight:700;text-align:center">无法加载 vocab.json<br><span style="font-size:13px;color:#a1a1aa">请用 http-server 在本地运行</span></p></div>';
+        });
+    })();
+
+    function initApp(initLang) {
+      document.getElementById('root').innerHTML = `
+        <div class="shell">
+          <header>
+            <div class="title-block">
+              <div class="title">通勤单词</div>
+              <div class="subtitle" id="langSubtitle">Français</div>
+            </div>
+            <div class="lang-switch">
+              <button class="lang-pill" id="frBtn"><span class="flag flag-fr"></span>FR</button>
+              <button class="lang-pill" id="deBtn"><span class="flag flag-de"></span>DE</button>
+            </div>
+          </header>
+
+          <div class="progress-row">
+            <div class="progress-meta">
+              <span id="progressLabel">0 / ${VOCAB.length} 已掌握</span>
+              <span id="indexLabel">1 / ${VOCAB.length}</span>
+            </div>
+            <div class="bar"><i id="progressBar"></i></div>
+          </div>
+
+          <div id="learnPanel" class="panel active">
+            <div class="card" id="mainCard">
+              <div class="card-top">
+                <span class="cat-pill" id="categoryLabel"></span>
+                <span class="counter" id="cardCounter"></span>
+              </div>
+              <div class="card-fields">
+                <div class="fields-ref">
+                  <div class="ref-item">
+                    <div class="label">中文</div>
+                    <div class="zh" id="zhText"></div>
+                  </div>
+                  <div class="ref-item">
+                    <div class="label">English</div>
+                    <div class="en" id="enText"></div>
+                  </div>
+                </div>
+                <div class="fields-target">
+                  <div class="label" id="targetLabel">Français</div>
+                  <div class="target" id="targetText"></div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="actions">
+                  <button class="btn-speak" id="speakBtn">🔊 播放发音</button>
+                  <button class="btn-known" id="knownBtn">标记掌握</button>
+                </div>
+                <div class="nav-row">
+                  <button class="btn-nav" id="prevBtn">← 上一词</button>
+                  <button class="btn-nav" id="nextBtn">下一词 →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="categoryPanel" class="panel"></div>
+          <div id="knownPanel"    class="panel"></div>
+          <div id="quizPanel"     class="panel"></div>
+        </div>
+
+        <nav class="tabs">
+          <button class="tab active" data-tab="learn">
+            <span class="tab-icon">📖</span><span class="tab-label">学词</span>
+          </button>
+          <button class="tab" data-tab="category">
+            <span class="tab-icon">🗂️</span><span class="tab-label">分类</span>
+          </button>
+          <button class="tab" data-tab="known">
+            <span class="tab-icon">⭐</span><span class="tab-label">已掌握</span>
+          </button>
+          <button class="tab" data-tab="quiz">
+            <span class="tab-icon">🎯</span><span class="tab-label">测验</span>
+          </button>
+        </nav>
+      `;
+      setupApp(initLang);
+    }
+
+    function setupApp(initLang) {
+      const state = { lang:initLang, index:0, known:new Set(), tab:'learn', quiz:null };
+      const $ = id => document.getElementById(id);
+      const els = {};
+      ['langSubtitle','frBtn','deBtn','progressLabel','indexLabel','progressBar',
+       'categoryLabel','cardCounter','zhText','enText','targetLabel','targetText',
+       'speakBtn','knownBtn','prevBtn','nextBtn',
+       'learnPanel','categoryPanel','knownPanel','quizPanel','mainCard']
+        .forEach(id => els[id] = $(id));
+
+      const storageKey = () => `vocab-progress-${state.lang}`;
+      function loadProgress() {
+        const raw = localStorage.getItem(storageKey());
+        if (!raw) { state.index=0; state.known=new Set(); return; }
+        try {
+          const p = JSON.parse(raw);
+          state.index = Math.min(Math.max(Number(p.lastIndex||0),0), VOCAB.length-1);
+          state.known = new Set(Array.isArray(p.knownIds) ? p.knownIds : []);
+        } catch { state.index=0; state.known=new Set(); }
+      }
+      function saveProgress() {
+        localStorage.setItem(storageKey(), JSON.stringify({ lastIndex:state.index, knownIds:[...state.known] }));
+      }
+
+      const item      = () => VOCAB[state.index];
+      const target    = () => item()[state.lang] || '';
+      const langLabel = () => state.lang === 'fr' ? 'Français' : 'Deutsch';
+      const voiceLang = () => state.lang === 'fr' ? 'fr-FR' : 'de-DE';
+
+      function showToast(text) {
+        const el = $('toast');
+        el.textContent = text; el.classList.add('show');
+        clearTimeout(showToast._t);
+        showToast._t = setTimeout(() => el.classList.remove('show'), 1600);
+      }
+
+      function speakTTS(text) {
+        if (!('speechSynthesis' in window)) return;
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = voiceLang(); u.rate = .88;
+        window.speechSynthesis.speak(u);
+      }
+      function _playAudio(path, fallbackText) {
+        const audio = $('card-audio');
+        audio.src = path; audio.currentTime = 0;
+        audio.play().catch(() => speakTTS(fallbackText));
+      }
+      function speak(text) {
+        const it = item();
+        const p = it.audio && it.audio[state.lang];
+        p ? _playAudio(p, text) : speakTTS(text);
+      }
+      function speakItem(it) {
+        const p = it.audio && it.audio[state.lang];
+        p ? _playAudio(p, it[state.lang]) : speakTTS(it[state.lang]);
+      }
+      function preloadAudio(it) {
+        const path = it && it.audio && it.audio[state.lang];
+        if (!path) return;
+        const audio = $('card-audio');
+        if (audio.src.split('/').pop() !== path.split('/').pop()) { audio.src=path; audio.load(); }
+      }
+
+      // Confetti
+      function launchConfetti() {
+        const overlay = document.createElement('div');
+        overlay.className = 'confetti-overlay';
+        const colors = state.lang === 'fr'
+          ? ['#002395','#ffffff','#ED2939','#f9d77e']
+          : ['#111111','#DD0000','#FFCE00','#ffffff'];
+        for (let i=0; i<28; i++) {
+          const dot = document.createElement('span');
+          dot.className = 'confetti-dot';
+          dot.style.cssText = `left:${5+Math.random()*90}%;background:${colors[i%colors.length]};animation-delay:${(Math.random()*.35).toFixed(2)}s;animation-duration:${(.6+Math.random()*.55).toFixed(2)}s`;
+          overlay.appendChild(dot);
+        }
+        document.body.appendChild(overlay);
+        setTimeout(() => overlay.remove(), 1600);
+      }
+
+      // Card animation
+      function animateCard(dir) {
+        els.mainCard.classList.remove('anim-right','anim-left');
+        void els.mainCard.offsetWidth;
+        els.mainCard.classList.add(dir>0 ? 'anim-right' : 'anim-left');
+      }
+
+      // Navigation
+      function go(delta) {
+        state.index = (state.index + delta + VOCAB.length) % VOCAB.length;
+        saveProgress(); preloadAudio(VOCAB[state.index]); animateCard(delta); renderLearn();
+      }
+      function goTo(i) {
+        const prev = state.index;
+        state.index = Math.min(Math.max(i,0), VOCAB.length-1);
+        saveProgress(); state.tab='learn';
+        preloadAudio(VOCAB[state.index]); animateCard(state.index>=prev?1:-1); render();
+      }
+      function setLang(lang) {
+        if (state.lang === lang) return;
+        saveProgress(); state.lang=lang; loadProgress();
+        const url = new URL(location.href);
+        url.searchParams.set('lang', lang);
+        history.replaceState(null,'',url.pathname+url.search);
+        preloadAudio(VOCAB[state.index]); render();
+      }
+
+      // Render: Learn
+      function renderLearn() {
+        const it = item();
+        const known = state.known.has(it.id);
+        document.body.setAttribute('data-lang', state.lang);
+        els.langSubtitle.textContent  = langLabel();
+        els.frBtn.classList.toggle('active', state.lang==='fr');
+        els.deBtn.classList.toggle('active', state.lang==='de');
+        els.categoryLabel.textContent = `${it.categoryEmoji||''} ${it.category}`;
+        els.cardCounter.textContent   = `${state.index+1} / ${VOCAB.length}`;
+        els.indexLabel.textContent    = `${state.index+1} / ${VOCAB.length}`;
+        els.progressLabel.textContent = `${state.known.size} / ${VOCAB.length} 已掌握`;
+        els.progressBar.style.width   = `${Math.round(state.known.size/VOCAB.length*100)}%`;
+        els.zhText.textContent     = it.zh_cn;
+        els.enText.textContent     = it.en;
+        els.targetLabel.textContent = langLabel().toUpperCase();
+        els.targetText.textContent  = target();
+        els.knownBtn.textContent = known ? '✓ 已掌握' : '标记掌握';
+        els.knownBtn.classList.toggle('on', known);
+      }
+
+      // Render: Category
+      function renderCategory() {
+        const groups = new Map();
+        VOCAB.forEach((v,i) => {
+          const key = `${v.categoryNo}|${v.category}|${v.section}`;
+          if (!groups.has(key)) groups.set(key,[]);
+          groups.get(key).push({v,i});
+        });
+        const sections = new Map();
+        groups.forEach((arr,key) => {
+          const sec = arr[0].v.section;
+          if (!sections.has(sec)) sections.set(sec,[]);
+          sections.get(sec).push([key,arr]);
+        });
+        let html = '';
+        sections.forEach((cats,sec) => {
+          html += `<div class="list-card"><div class="section-header">${sec}</div>`;
+          cats.forEach(([key,arr]) => {
+            const cat = arr[0].v.category;
+            const emoji = arr[0].v.categoryEmoji||'';
+            const done = arr.filter(x=>state.known.has(x.v.id)).length;
+            const first = arr.find(x=>!state.known.has(x.v.id))||arr[0];
+            const pct = Math.round(done/arr.length*100);
+            html += `<div class="list-row" data-goto="${first.i}">
+              <div class="list-main"><b>${emoji} ${cat}</b><span>${done===arr.length?'✓ 全部掌握':`${arr.length} 词 · ${pct}%`}</span></div>
+              <div class="list-stat" style="color:${done===arr.length?'#16a34a':'inherit'}">${done}/${arr.length}</div>
+            </div>`;
+          });
+          html += '</div>';
+        });
+        els.categoryPanel.innerHTML = html;
+        els.categoryPanel.querySelectorAll('.list-row[data-goto]').forEach(row => {
+          row.onclick = () => goTo(Number(row.dataset.goto));
+        });
+      }
+
+      // Render: Known
+      function renderKnown(query) {
+        const allKnown = VOCAB.map((v,i)=>({v,i})).filter(x=>state.known.has(x.v.id));
+        if (!allKnown.length) {
+          els.knownPanel.innerHTML = `<div class="list-card" style="padding:24px 18px;text-align:center">
+            <div style="font-size:32px;margin-bottom:10px">⭐</div>
+            <b style="font-size:15px;display:block;margin-bottom:6px">还没有已掌握的词</b>
+            <p class="muted" style="font-size:13px">在学词页点击「标记掌握」后会出现在这里。</p>
+          </div>`;
+          return;
+        }
+        const q = (query||'').trim().toLowerCase();
+        const items = q ? allKnown.filter(x =>
+            x.v.zh_cn.toLowerCase().includes(q) ||
+            x.v.en.toLowerCase().includes(q) ||
+            x.v[state.lang].toLowerCase().includes(q)) : allKnown;
+
+        els.knownPanel.innerHTML = `
+          <div class="search-wrap">
+            <input class="search-input" id="knownSearch" type="search"
+              placeholder="搜索中文、English、${langLabel()}…"
+              value="${q.replace(/"/g,'&quot;')}" autocomplete="off" />
+          </div>
+          ${items.length
+            ? `<div class="list-card">${items.map(x=>`
+                <div class="list-row" data-idx="${x.i}">
+                  <div class="list-main">
+                    <b>${x.v.zh_cn}</b>
+                    <span>${x.v.en} · <span style="font-weight:800;color:#3f3f46">${x.v[state.lang]}</span></span>
+                  </div>
+                  <div class="list-stat">›</div>
+                </div>`).join('')}</div>`
+            : `<div class="list-card" style="padding:16px 18px"><p class="muted" style="font-size:14px">没有找到「${q}」</p></div>`}`;
+
+        els.knownPanel.querySelectorAll('.list-row[data-idx]').forEach(row => {
+          row.onclick = () => goTo(Number(row.dataset.idx));
+        });
+        const se = $('knownSearch');
+        if (se) {
+          se.addEventListener('input', e => renderKnown(e.target.value));
+          if (!q) setTimeout(() => se.focus(), 50);
+        }
+      }
+
+      // Quiz
+      function shuffle(arr) {
+        const a=[...arr];
+        for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+        return a;
+      }
+      function quizOptions(correct) {
+        const ct = correct[state.lang];
+        const same = VOCAB.filter(v=>v.id!==correct.id&&v.category===correct.category&&v[state.lang]!==ct);
+        const rest = VOCAB.filter(v=>v.id!==correct.id&&v.category!==correct.category&&v[state.lang]!==ct);
+        const pool = [correct,...shuffle(same).slice(0,2),...shuffle(rest).slice(0,3)];
+        const seen=new Set(), unique=[];
+        for(const v of pool){ if(!seen.has(v[state.lang])){ seen.add(v[state.lang]); unique.push(v); } }
+        if(unique.length<4){
+          for(const e of shuffle(rest.filter(v=>!unique.find(u=>u.id===v.id)&&!seen.has(v[state.lang])))){
+            if(unique.length>=4) break;
+            unique.push(e); seen.add(e[state.lang]);
+          }
+        }
+        return shuffle(unique.slice(0,4));
+      }
+      function startQuiz() {
+        const pool = VOCAB.filter(v=>state.known.has(v.id));
+        if(pool.length<4){ showToast('至少掌握 4 个单词后可测验'); return; }
+        const items = shuffle(pool).slice(0,Math.min(10,pool.length));
+        state.quiz = { items, options:quizOptions(items[0]), q:0, locked:false, selected:null, score:0 };
+        renderQuiz();
+      }
+      function answerQuiz(choiceId) {
+        if(!state.quiz||state.quiz.locked) return;
+        const correct = state.quiz.items[state.quiz.q];
+        state.quiz.locked=true; state.quiz.selected=choiceId;
+        if(choiceId===correct.id){ state.quiz.score++; speakItem(correct); launchConfetti(); }
+        renderQuiz();
+      }
+      function nextQuiz() {
+        if(!state.quiz) return;
+        if(state.quiz.q>=state.quiz.items.length-1){
+          const {score,items:{length:total}}=state.quiz; state.quiz=null;
+          const msg = score===total?'全部答对！太棒了 🏆':score>=total*.7?'不错！继续加油 💪':'再练练，你可以的 ✨';
+          els.quizPanel.innerHTML=`<div class="quiz-card" style="text-align:center">
+            <div style="font-size:40px;margin-bottom:12px">🎉</div>
+            <h2 style="font-size:20px;font-weight:900;margin-bottom:8px">测验完成</h2>
+            <div class="quiz-q">${score} / ${total}</div>
+            <p class="muted" style="font-size:14px;margin:8px 0 4px">${msg}</p>
+            <button class="small-btn" id="restartQuizBtn">再来一局</button>
+          </div>`;
+          $('restartQuizBtn').onclick=startQuiz; return;
+        }
+        state.quiz.q++; state.quiz.locked=false; state.quiz.selected=null;
+        state.quiz.options=quizOptions(state.quiz.items[state.quiz.q]);
+        renderQuiz();
+      }
+      function renderQuiz() {
+        if(!state.quiz){
+          const count=state.known.size;
+          const canStart=count>=4;
+          els.quizPanel.innerHTML=`<div class="quiz-card">
+            <div style="font-size:36px;margin-bottom:12px">🎯</div>
+            <h2 style="font-size:20px;font-weight:900;margin-bottom:8px">随机测验</h2>
+            <p class="muted" style="font-size:14px;margin-bottom:18px;line-height:1.5">从已掌握的单词中随机出题<br>答对会有惊喜 ✨</p>
+            <div style="font-size:28px;font-weight:950;margin-bottom:16px">${count}<span style="font-size:15px;font-weight:600;color:var(--muted)"> 个可用单词</span></div>
+            <button class="small-btn" id="startQuizBtn" style="${canStart?'':'opacity:.4;pointer-events:none'}">
+              ${canStart?'开始测验':`还差 ${4-count} 个才能开始`}
+            </button>
+          </div>`;
+          if(canStart) $('startQuizBtn').onclick=startQuiz; return;
+        }
+        const q=state.quiz.items[state.quiz.q];
+        const options=state.quiz.options;
+        const correctId=q.id;
+        els.quizPanel.innerHTML=`<div class="quiz-card">
+          <div style="font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">${state.quiz.q+1} / ${state.quiz.items.length}</div>
+          <div class="quiz-q">${q.zh_cn}</div>
+          <div class="quiz-sub">${q.en}</div>
+          <p style="font-size:12px;color:var(--muted);font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:.08em">选择正确的 ${langLabel()}</p>
+          ${options.map(o=>{
+            let cls='option';
+            if(state.quiz.locked&&o.id===correctId) cls+=' correct';
+            if(state.quiz.locked&&o.id===state.quiz.selected&&o.id!==correctId) cls+=' wrong';
+            return `<button class="${cls}" data-id="${o.id}">${o[state.lang]}</button>`;
+          }).join('')}
+          ${state.quiz.locked?'<button class="small-btn" id="nextQuizBtn">下一题 →</button>':''}
+        </div>`;
+        els.quizPanel.querySelectorAll('.option[data-id]').forEach(btn => {
+          btn.onclick=()=>answerQuiz(btn.dataset.id);
+        });
+        const nq=$('nextQuizBtn');
+        if(nq) nq.onclick=nextQuiz;
+      }
+
+      function renderTabs() {
+        document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===state.tab));
+        ['learn','category','known','quiz'].forEach(t=>$(t+'Panel').classList.toggle('active',t===state.tab));
+      }
+      function render() { renderLearn(); renderCategory(); renderKnown(); renderQuiz(); renderTabs(); }
+
+      // Events
+      els.frBtn.onclick  = ()=>setLang('fr');
+      els.deBtn.onclick  = ()=>setLang('de');
+      els.prevBtn.onclick = ()=>go(-1);
+      els.nextBtn.onclick = ()=>go(1);
+      els.speakBtn.onclick = ()=>speak(target());
+      els.knownBtn.onclick = () => {
+        const it=item(), wasKnown=state.known.has(it.id);
+        if(wasKnown){ state.known.delete(it.id); }
+        else {
+          state.known.add(it.id);
+          els.knownBtn.classList.add('bump');
+          setTimeout(()=>els.knownBtn.classList.remove('bump'),220);
+          launchConfetti();
+        }
+        saveProgress(); renderLearn(); renderCategory(); renderKnown(); renderTabs();
+      };
+      document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{ state.tab=b.dataset.tab; render(); });
+
+      // Swipe
+      let sx=null, sy=null;
+      els.mainCard.addEventListener('touchstart',e=>{ sx=e.touches[0].clientX; sy=e.touches[0].clientY; },{passive:true});
+      els.mainCard.addEventListener('touchend',e=>{
+        if(sx===null) return;
+        const dx=e.changedTouches[0].clientX-sx, dy=e.changedTouches[0].clientY-sy;
+        sx=sy=null;
+        if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.4) go(dx<0?1:-1);
+      },{passive:true});
+
+      loadProgress();
+      preloadAudio(VOCAB[state.index]);
+      render();
+    }
+  </script>
+</body>
+</html>

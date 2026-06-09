@@ -1,0 +1,989 @@
+﻿編號,大分類,小分類,分類內序號,中文_簡體,English,Français,Deutsch
+1,A1 必會單字,數字,1,号码（阳性名词）,number (n.),le numéro,die Nummer
+2,A1 必會單字,數字,2,数字,number / digit,le chiffre,die Ziffer
+3,A1 必會單字,數字,3,一,one,un,eins
+4,A1 必會單字,數字,4,二,two,deux,zwei
+5,A1 必會單字,數字,5,三,three,trois,drei
+6,A1 必會單字,數字,6,四,four,quatre,vier
+7,A1 必會單字,數字,7,五,five,cinq,fünf
+8,A1 必會單字,數字,8,六,six,six,sechs
+9,A1 必會單字,數字,9,七,seven,sept,sieben
+10,A1 必會單字,數字,10,八,eight,huit,acht
+11,A1 必會單字,數字,11,九,nine,neuf,neun
+12,A1 必會單字,數字,12,十,ten,dix,zehn
+13,A1 必會單字,數字,13,十一,eleven,onze,elf
+14,A1 必會單字,數字,14,十二,twelve,douze,zwölf
+15,A1 必會單字,數字,15,十三,thirteen,treize,dreizehn
+16,A1 必會單字,數字,16,十四,fourteen,quatorze,vierzehn
+17,A1 必會單字,數字,17,十五,fifteen,quinze,fünfzehn
+18,A1 必會單字,數字,18,十六,sixteen,seize,sechzehn
+19,A1 必會單字,數字,19,十七,seventeen,dix-sept,siebzehn
+20,A1 必會單字,數字,20,十八,eighteen,dix-huit,achtzehn
+21,A1 必會單字,數字,21,十九,nineteen,dix-neuf,neunzehn
+22,A1 必會單字,數字,22,二十,twenty,vingt,zwanzig
+23,A1 必會單字,數字,23,三十,thirty,trente,dreißig
+24,A1 必會單字,數字,24,四十,forty,quarante,vierzig
+25,A1 必會單字,數字,25,五十,fifty,cinquante,fünfzig
+26,A1 必會單字,數字,26,六十,sixty,soixante,sechzig
+27,A1 必會單字,數字,27,七十,seventy,soixante-dix,siebzig
+28,A1 必會單字,數字,28,八十,eighty,quatre-vingts,achtzig
+29,A1 必會單字,數字,29,九十,ninety,quatre-vingt-dix,neunzig
+30,A1 必會單字,數字,30,一百,one hundred,cent,hundert
+31,A1 必會單字,數字,31,一千,one thousand,mille,tausend
+32,A1 必會單字,數字,32,百万（阳性名词）,million (n.),le million,die Million
+33,A1 必會單字,時間,1,时间,time,le temps,die Zeit
+34,A1 必會單字,時間,2,秒,second,la seconde,die Sekunde
+35,A1 必會單字,時間,3,分（阴性名词）,minute (n.),la minute,die Minute
+36,A1 必會單字,時間,4,时间，时（阴性名词）,"time, hour (n.)",l’heure,die Stunde
+37,A1 必會單字,一天,1,天（阴性名词）,day (n.),la journée,der Tag
+38,A1 必會單字,一天,2,傍晚（阳性名词）,evening (n.),le soir,der Abend
+39,A1 必會單字,一天,3,夜晚（阴性名词）,night (n.),la nuit,die Nacht
+40,A1 必會單字,一天,4,今天,today,aujourd’hui,heute
+41,A1 必會單字,一天,5,早晨（阳性名词）,morning (n.),le matin,der Morgen
+42,A1 必會單字,一天,6,中午（阳性名词）,midday (n.),le midi,der Mittag
+43,A1 必會單字,一天,7,下午,afternoon,l’après-midi,der Nachmittag
+44,A1 必會單字,一天,8,午夜,midnight,minuit,die Mitternacht
+45,A1 必會單字,星期,1,工作日,weekday,le jour de semaine,der Wochentag
+46,A1 必會單字,星期,2,周末,weekend,le week-end,das Wochenende
+47,A1 必會單字,星期,3,星期一（阳性名词）,Monday (n.),le lundi,der Montag
+48,A1 必會單字,星期,4,星期二（阳性名词）,Tuesday (n.),le mardi,der Dienstag
+49,A1 必會單字,星期,5,星期三（阳性名词）,Wednesday (n.),le mercredi,der Mittwoch
+50,A1 必會單字,星期,6,星期四（阳性名词）,Thursday (n.),le jeudi,der Donnerstag
+51,A1 必會單字,星期,7,星期五（阳性名词）,Friday (n.),le vendredi,der Freitag
+52,A1 必會單字,星期,8,星期六（阳性名词）,saturday (n.),le samedi,der Samstag
+53,A1 必會單字,星期,9,星期日（阳性名词）,Sunday (n.),le dimanche,der Sonntag
+54,A1 必會單字,年月,1,年（阴性名词）,year (n.),l’année,das Jahr
+55,A1 必會單字,年月,2,日期（阴性名词）,date (n.),la date,das Datum
+56,A1 必會單字,年月,3,月,month,le mois,der Monat
+57,A1 必會單字,年月,4,一月（阳性名词）,January (n.),janvier,der Januar
+58,A1 必會單字,年月,5,二月（阳性名词）,February (n.),février,der Februar
+59,A1 必會單字,年月,6,三月（阳性名词）,march (n.),mars,der März
+60,A1 必會單字,年月,7,四月（阳性名词）,April (n.),avril,der April
+61,A1 必會單字,年月,8,五月（阳性名词）,May (n.),mai,der Mai
+62,A1 必會單字,年月,9,六月（阳性名词）,June (n.),juin,der Juni
+63,A1 必會單字,年月,10,七月（阳性名词）,July (n.),juillet,der Juli
+64,A1 必會單字,年月,11,八月（阳性名词）,august (n.),août,der August
+65,A1 必會單字,年月,12,九月（阳性名词）,September (n.),septembre,der September
+66,A1 必會單字,年月,13,十月（阳性名词）,October (n.),octobre,der Oktober
+67,A1 必會單字,年月,14,十一月（阳性名词）,November (n.),novembre,der November
+68,A1 必會單字,年月,15,十二月（阳性名词）,December (n.),décembre,der Dezember
+69,A1 必會單字,時間段,1,期间,duration,la durée,die Dauer
+70,A1 必會單字,時間段,2,时期,period,la période,der Zeitraum
+71,A1 必會單字,時間段,3,上午,morning,la matinée,der Vormittag
+72,A1 必會單字,時間段,4,夜间（阴性名词）,evening (n.),la soirée,der Abend
+73,A1 必會單字,時間段,5,天（阴性名词）,day (n.),la journée,der Tag
+74,A1 必會單字,時間段,6,年（阴性名词）,year (n.),l’année,das Jahr
+75,A1 必會單字,季節,1,季节,season,la saison,die Jahreszeit
+76,A1 必會單字,季節,2,春天,spring,le printemps,der Frühling
+77,A1 必會單字,季節,3,夏天（阳性名词）,summer (n.),l’été,der Sommer
+78,A1 必會單字,季節,4,秋天,autumn / fall,l’automne,der Herbst
+79,A1 必會單字,季節,5,冬天（阳性名词）,winter (n.),l’hiver,der Winter
+80,A1 必會單字,時間線,1,過去,past,le passé,die Vergangenheit
+81,A1 必會單字,時間線,2,现在,present,le présent,die Gegenwart
+82,A1 必會單字,時間線,3,未來,future,le futur,die Zukunft
+83,A1 必會單字,證件,1,身份,identity,l’identité,die Identität
+84,A1 必會單字,證件,2,个人信息,profile,le profil,das Profil
+85,A1 必會單字,證件,3,护照,passport,le passeport,der Reisepass
+86,A1 必會單字,證件,4,签证,visa,le visa,das Visum
+87,A1 必會單字,證件,5,居留证,residence permit,le titre de séjour,der Aufenthaltstitel
+88,A1 必會單字,自介,1,介绍（阴性名词）,presentation (n.),la présentation,die Präsentation
+89,A1 必會單字,自介,2,先生（阳性名词）,gentleman (n.),le monsieur,der Herr
+90,A1 必會單字,自介,3,夫人（阴性名词）,madam (n.),madame,die Frau
+91,A1 必會單字,自介,4,小姐,Miss,mademoiselle,das Fräulein
+92,A1 必會單字,自介,5,名字（阳性名词）,name (n.),le nom,der Name
+93,A1 必會單字,自介,6,姓（阳性名词）,last name (n.),le nom de famille,der Nachname
+94,A1 必會單字,自介,7,电子邮件（阳性名词）,email (n.),le courriel,die E-Mail
+95,A1 必會單字,自介,8,性別,gender / sex,le sexe,das Geschlecht
+96,A1 必會單字,自介,9,年龄（阳性名词）,age (n.),l’âge,das Alter
+97,A1 必會單字,自介,10,出生日期（阴性名词）,date of birth (n.),la date de naissance,das Geburtsdatum
+98,A1 必會單字,自介,11,国籍（阴性名词）,nationality (n.),la nationalité,die Nationalität
+99,A1 必會單字,自介,12,职业（阴性名词）,profession (n.),la profession,der Beruf
+100,A1 必會單字,自介,13,护照号碼,passport number,le numéro de passeport,die Reisepassnummer
+101,A1 必會單字,自介,14,手机号,mobile phone number,le numéro de portable,die Handynummer
+102,A1 必會單字,自介,15,联系地址,contact address,l’adresse de contact,die Kontaktadresse
+103,A1 必會單字,自介,16,住处,home / residence,le domicile,der Wohnsitz
+104,A1 必會單字,自介,17,邮政编码,postal code,le code postal,die Postleitzahl
+105,A1 必會單字,自介,18,地址（阴性名词）,address (n.),l’adresse,die Adresse
+106,A1 必會單字,自介,19,教育程度,level of education,le niveau d’études,das Bildungsniveau
+107,人文活動,家庭,1,家庭（阴性名词）,family (n.),la famille,die Familie
+108,人文活動,家庭,2,出生,birth,la naissance,die Geburt
+109,人文活動,家庭,3,一对，一双（阳性名词）,couple (n.),le couple,das Paar
+110,人文活動,家庭,4,结婚,marriage,le mariage,die Ehe
+111,人文活動,家庭,5,死亡（阴性名词）,death (n.),la mort,der Tod
+112,人文活動,家庭,6,父母,parents,les parents,die Eltern
+113,人文活動,家庭,7,祖父母,grandparents,les grands-parents,die Großeltern
+114,人文活動,家庭,8,父亲（阳性名词）,father (n.),le père,der Vater
+115,人文活動,家庭,9,母亲（阴性名词）,mother (n.),la mère,die Mutter
+116,人文活動,家庭,10,丈夫,husband,le mari,der Ehemann
+117,人文活動,家庭,11,妻子,wife,la femme,die Ehefrau
+118,人文活動,家庭,12,奶奶（阴性名词）,grandmother (n.),la grand-mère,die Großmutter
+119,人文活動,家庭,13,爷爷,grandfather,le grand-père,der Großvater
+120,人文活動,家庭,14,女儿（阴性名词）,daughter (n.),la fille,die Tochter
+121,人文活動,家庭,15,儿子（阳性名词）,son (n.),le fils,der Sohn
+122,人文活動,家庭,16,姐妹（阴性名词）,sister (n.),la sœur,die Schwester
+123,人文活動,家庭,17,兄弟（阳性名词）,brother (n.),le frère,der Bruder
+124,人文活動,家庭,18,堂兄弟（阳性名词）,cousin (n.),le cousin,der Cousin
+125,人文活動,家庭,19,表姐妹、堂姐妹,female cousin,la cousine,die Cousine
+126,人文活動,家庭,20,姑母，姨母（阴性名词）,aunt (n.),la tante,die Tante
+127,人文活動,家庭,21,叔叔（阳性名词）,uncle (n.),l’oncle,der Onkel
+128,人文活動,家庭,22,侄子,nephew,le neveu,der Neffe
+129,人文活動,家庭,23,侄女,niece,la nièce,die Nichte
+130,人文活動,家庭,24,孙子,grandson,le petit-fils,der Enkel
+131,人文活動,家庭,25,孙女，外孙女（阴性名 词）,granddaughter (n.),la petite-fille,die Enkeltochter
+132,人文活動,人,1,人（阴性名词）,person (n.),la personne,die Person
+133,人文活動,人,2,女人,woman,la femme,Frau
+134,人文活動,人,3,男人（阳性名词）,man (n.),l’homme,der Mann
+135,人文活動,人,4,寶寶,baby,le bébé,Baby
+136,人文活動,人,5,小孩,child,l’enfant,Kind
+137,人文活動,人,6,小男孩,boy,le garçon,Junge
+138,人文活動,人,7,青少年,teenager,l’adolescent,der Jugendliche
+139,人文活動,人,8,年轻的（形容词）,young (adj.),jeune,jung
+140,人文活動,人,9,朋友（阳性名词）,friend (n.),l’ami,der Freund
+141,人文活動,人,10,邻居（阳性名词）,neighbour (n.),le voisin,der Nachbar
+142,人文活動,人,11,夥伴,partner,le partenaire,der Partner
+143,人文活動,人,12,同学,classmate,le camarade,der Klassenkamerad
+144,人文活動,人,13,同事,colleague,le collègue,der Kollege
+145,人文活動,人,14,客人,customer / guest,le client,der Kunde
+146,人文活動,人,15,陌生人,stranger,l’inconnu,der Unbekannte
+147,人文活動,人,16,大人,adult,l’adulte,der Erwachsene
+148,人文活動,人,17,老人,elderly person,la personne âgée,ältere Person
+149,人文活動,人,18,女儿（阴性名词）,daughter (n.),la fille,die Tochter
+150,人文活動,人,19,居民（阳性名词）,inhabitant (n.),l’habitant,der Einwohner
+151,人文活動,人,20,旅客,traveler,le voyageur,der Reisende
+152,人文活動,職業,1,工作（阳性名词）,work (n.),le travail,die Arbeit
+153,人文活動,職業,2,职业（阴性名词）,profession (n.),la profession,der Beruf
+154,人文活動,職業,3,企业，公司（阴性名词）,business (n.),l’entreprise,das Unternehmen
+155,人文活動,職業,4,招募/提供/报價,offer,l’offre,das Angebot
+156,人文活動,職業,5,面試,interview,l’entretien,das Vorstellungsgespräch
+157,人文活動,職業,6,功能（阴性名词）,function (n.),la fonction,die Funktion
+158,人文活動,職業,7,职员，雇员（阳性名词）,employee (n.),l’employé,der Angestellte
+159,人文活動,職業,8,雇主,employer,l’employeur,der Arbeitgeber
+160,人文活動,職業,9,岗位（阳性名词）,post (n.),le poste,die Stelle
+161,人文活動,職業,10,老師,teacher,le professeur,der Lehrer
+162,人文活動,職業,11,医生（阳性名词）,doctor (n.),le médecin,der Arzt
+163,人文活動,職業,12,牙医,dentist,le dentiste,der Zahnarzt
+164,人文活動,職業,13,新闻记者（名词）,journalist (n.),le journaliste,der Journalist
+165,人文活動,職業,14,攝影師,photographer,le photographe,der Fotograf
+166,人文活動,職業,15,工程师（名词）,engineer (n.),l’ingénieur,der Ingenieur
+167,人文活動,職業,16,律師,lawyer,l’avocat,der Anwalt
+168,人文活動,職業,17,厨師,cook / chef,le cuisinier,der Koch
+169,人文活動,職業,18,服务也（阳性名词）,server (n.),le serveur,der Kellner
+170,人文活動,職業,19,司机,driver,le chauffeur,der Fahrer
+171,人文活動,職業,20,警察,police officer,le policier,der Polizist
+172,人文活動,職業,21,护士,nurse,l’infirmier,der Krankenpfleger
+173,人文活動,職業,22,药劑師,pharmacist,le pharmacien,der Apotheker
+174,人文活動,職業,23,学生,student,l’étudiant,der Student
+175,人文活動,職業,24,店员,salesperson,le vendeur,der Verkäufer
+176,人文活動,職業,25,校长，经理（阳性名词）,director (n.),le directeur,der Direktor
+177,人文活動,職業,26,秘书（名词）,secretary (n.),le secrétaire,der Sekretär
+178,人文活動,告示牌,1,公告,announcement,l’annonce,Ankündigung
+179,人文活動,告示牌,2,信息,information,l’information,Information
+180,人文活動,告示牌,3,信息,information / details,le renseignement,Auskunft
+181,人文活動,告示牌,4,消息,message,le message,Nachricht
+182,人文活動,告示牌,5,注意,attention,l’attention,Achtung
+183,人文活動,告示牌,6,命令/顺序,order,l’ordre,die Reihenfolge
+184,人文活動,告示牌,7,禁止,prohibition,l’interdiction,Verbot
+185,人文活動,告示牌,8,危險,danger,le danger,Gefahr
+186,人文活動,告示牌,9,义务责任,obligation,l’obligation,Pflicht
+187,人文活動,告示牌,10,入口（阴性名词）,"entrance, starter (n.)",l’entrée,der Eingang
+188,人文活動,告示牌,11,出口（阴性名词）,exit (n.),la sortie,der Ausgang
+189,人文活動,告示牌,12,开放,open,ouvert,offen
+190,人文活動,告示牌,13,关闭,closed,fermé,geschlossen
+191,人文活動,告示牌,14,緊急出口,emergency exit,la sortie de secours,Notausgang
+192,人文活動,告示牌,15,请勿进入,no entry,entrée interdite,Eintritt verboten
+193,人文活動,告示牌,16,告示牌,sign,le panneau,Schild
+194,人文活動,活動,1,活动,activity,l’activité,Aktivität
+195,人文活動,活動,2,事件,event,l’événement,Ereignis
+196,人文活動,活動,3,行动,action,l’action,Handlung
+197,人文活動,活動,4,集合（阴性名词）,meeting (n.),la réunion,das Treffen
+198,人文活動,活動,5,演唱会,concert,le concert,Konzert
+199,人文活動,活動,6,狂欢节（阳性名词）,carnival (n.),le carnaval,der Karneval
+200,人文活動,活動,7,节（阳性名词）,festival (n.),le festival,das Festival
+201,人文活動,活動,8,文化,culture,la culture,Kultur
+202,人文活動,活動,9,抗議,demonstration,la manifestation,Demonstration
+203,人文活動,活動,10,夜间（阴性名词）,evening (n.),la soirée,der Abend
+204,人文活動,活動,11,展览（阴性名词）,exhibition (n.),l’exposition,die Ausstellung
+205,人文活動,活動,12,比賽,competition / match,le concours,der Wettbewerb
+206,人文活動,活動,13,典礼,ceremony,la cérémonie,Zeremonie
+207,人文活動,活動,14,约会（阳性名词）,"appointment, date (n.)",le rendez-vous,der Termin
+208,人文活動,活動,15,节目（阳性名词）,"programme (TV), program (computer) (n.)",le programme,das Programm
+209,人文活動,節日,1,节日，纪念日（阴性名 词）,"party, fair (n.)",la fête,das Fest
+210,人文活動,節日,2,情人节,Valentine's Day,la Saint-Valentin,Valentinstag
+211,人文活動,節日,3,圣诞节（阳性名词）,Christmas (n.),Noël,Weihnachten
+212,人文活動,節日,4,万圣节,Halloween,Halloween,Halloween
+213,人文活動,節日,5,复活节,Easter,Pâques,Ostern
+214,人文活動,節日,6,新年,New Year's Day,le Nouvel An,Neujahr
+215,人文活動,節日,7,国庆日,national holiday,la fête nationale,Nationalfeiertag
+216,人文活動,節日,8,周年纪念日，生日（阳性 名词）,"birthday, anniversary (n.)",l’anniversaire,der Geburtstag
+217,人文活動,節日,9,母親节,Mother's Day,la fête des Mères,Muttertag
+218,人文活動,節日,10,父親节,Father's Day,la fête des Pères,Vatertag
+219,人文活動,節日,11,婚礼,wedding,le mariage,die Hochzeit
+220,人文活動,運動,1,运动（阳性名词）,sport (n.),le sport,der Sport
+221,人文活動,運動,2,運动社團,sports club,le club de sport,Sportverein
+222,人文活動,運動,3,比賽,competition / match,le match,das Spiel
+223,人文活動,運動,4,瑜珈,yoga,le yoga,Yoga
+224,人文活動,運動,5,跳舞（动词）,dance (v.),danser,tanzen
+225,人文活動,運動,6,溜冰,ice skating,le patinage,Eislaufen
+226,人文活動,運動,7,游泳（阴性名词）,swimming (n.),la natation,das Schwimmen
+227,人文活動,運動,8,馬術,horse riding,l’équitation,Reiten
+228,人文活動,運動,9,羽毛球,badminton,le badminton,Badminton
+229,人文活動,運動,10,网球（阳性名词）,tennis (n.),le tennis,das Tennis
+230,人文活動,運動,11,足球（阳性名词）,football (n.),le football,der Fußball
+231,人文活動,運動,12,籃球,basketball,le basket-ball,Basketball
+232,人文活動,運動,13,排球（阳性名词）,volleyball (n.),le volley-ball,das Volleyball
+233,人文活動,運動,14,跑步（阳性名词）,jogging (n.),le jogging,das Jogging
+234,人文活動,運動,15,自行车（阳性名词）,bike (n.),le vélo,das Fahrrad
+235,人文活動,運動,16,滑雪（阳性名词）,skiing (n.),le ski,der Ski
+236,人文活動,運動,17,肌肉锻炼（阴性名词）,body-building (n.),la musculation,das Bodybuilding
+237,人文活動,運動,18,桌球,table tennis,le tennis de table,Tischtennis
+238,人文活動,遊戲,1,游戏（阳性名词）,game (n.),le jeu,das Spiel
+239,人文活動,遊戲,2,玩具,toy,le jouet,Spielzeug
+240,人文活動,遊戲,3,乐透,lottery,le loto,Lotto
+241,人文活動,遊戲,4,菜单，卡片（阴性名词）,"menu, card (n.)",la carte,die Karte
+242,人文活動,遊戲,5,桌遊,board game,le jeu de société,Brettspiel
+243,人文活動,興趣,1,空闲时间（阳性名词）,leisure (n.),le loisir,die Freizeit
+244,人文活動,興趣,2,暫停/休息,break,la pause,Pause
+245,人文活動,興趣,3,露營,camping,le camping,Camping
+246,人文活動,興趣,4,照相,photography,la photographie,Fotografie
+247,人文活動,興趣,5,閱讀,reading,la lecture,das Lesen
+248,人文活動,興趣,6,散步（阴性名词）,walk (n.),la promenade,der Spaziergang
+249,人文活動,興趣,7,手作,DIY / crafts,le bricolage,das Basteln
+250,人文活動,興趣,8,園藝,gardening,le jardinage,Gartenarbeit
+251,人文活動,樂器,1,吉他,guitar,la guitare,Gitarre
+252,人文活動,樂器,2,鋼琴,piano,le piano,Klavier
+253,人文活動,樂器,3,打擊乐,percussion,la percussion,das Schlagzeug
+254,人文活動,學業,1,学校,school,l’école,Schule
+255,人文活動,學業,2,教育/学問,education,l’éducation,Bildung
+256,人文活動,學業,3,登记注册（阴性名词）,registration (n.),l’inscription,die Anmeldung
+257,人文活動,學業,4,食堂,canteen,la cantine,Kantine
+258,人文活動,學業,5,幼儿園,kindergarten,l’école maternelle,Kindergarten
+259,人文活動,學業,6,小学,primary school,l’école primaire,Grundschule
+260,人文活動,學業,7,初中（阳性名词）,middle school (n.),le collège,die Mittelschule
+261,人文活動,學業,8,高中,high school,le lycée,das Gymnasium
+262,人文活動,學業,9,大学（阴性名词）,university (n.),l’université,die Universität
+263,人文活動,學業,10,学士,bachelor's degree,la licence,Bachelor
+264,人文活動,學業,11,碩士,master's degree,le master,Master
+265,人文活動,學業,12,博士学位（阳性名词）,phd (n.),le doctorat,das Doktorat
+266,人文活動,學業,13,课程，过程（阳性名词）,class (n.),le cours,der Kurs
+267,人文活動,學業,14,等级，班级（阴性名词）,class (n.),la classe,die Klasse
+268,人文活動,學業,15,应该（动词）,"owe, have to (v.)",devoir,müssen
+269,人文活動,學業,16,成績,grade / score,la note,Note
+270,人文活動,學業,17,文憑,diploma,le diplôme,Diplom
+271,人文活動,學業,18,学生证,student card,la carte d’étudiant,Studentenausweis
+272,人文活動,科目,1,音乐（阴性名词）,music (n.),la musique,die Musik
+273,人文活動,科目,2,文学,literature,la littérature,Literatur
+274,人文活動,科目,3,历史（阴性名词）,history (n.),l’histoire,die Geschichte
+275,人文活動,科目,4,地理,geography,la géographie,Geografie
+276,人文活動,科目,5,物理,physics,la physique,Physik
+277,人文活動,科目,6,化学,chemistry,la chimie,Chemie
+278,人文活動,科目,7,数学,mathematics,les mathématiques,Mathematik
+279,人文活動,科目,8,生物,biology,la biologie,Biologie
+280,人文活動,科目,9,体育,physical education,l’EPS,Sportunterricht
+281,人文活動,科目,10,藝術,art,l’art,Kunst
+282,人文活動,科目,11,經濟,economy / economics,l’économie,die Wirtschaft
+283,人文活動,書,1,书,book,le livre,Buch
+284,人文活動,書,2,小冊子,brochure,la brochure,Broschüre
+285,人文活動,書,3,逐字稿,transcript,la transcription,Transkript
+286,人文活動,書,4,字典,dictionary,le dictionnaire,Wörterbuch
+287,人文活動,書,5,长篇小说（阳性名词）,novel (n.),le roman,der Roman
+288,人文活動,書,6,閱讀,reading,la lecture,das Lesen
+289,人文活動,書,7,版本,edition,l’édition,Ausgabe
+290,人文活動,書,8,參考,reference,la référence,Referenz
+291,人文活動,書,9,页（阴性名词）,page (n.),la page,die Seite
+292,人文活動,書,10,章节,chapter,le chapitre,Kapitel
+293,人文活動,書,11,標題,title,le titre,Titel
+294,人文活動,書,12,作者,author,l’auteur,der Autor
+295,人文活動,書,13,圖书馆藏书,work / library item,l’ouvrage,Werk
+296,人文活動,考試,1,听（动词）,listen (v.),écouter,zuhören
+297,人文活動,考試,2,说（动词）,"say, tell (v.)",dire,sagen
+298,人文活動,考試,3,讀,reading,lire,lesen
+299,人文活動,考試,4,写（动词）,write (v.),écrire,schreiben
+300,人文活動,考試,5,味覺,taste,le goût,Geschmack
+301,人文活動,考試,6,触（动词）,touch (v.),toucher,berühren
+302,人文活動,考試,7,檢驗,check / test,le contrôle,Kontrolle
+303,人文活動,考試,8,測驗,test,le test,Test
+304,人文活動,考試,9,考试（阳性名词）,"exam, medical (n.)",l’examen,die Prüfung
+305,人文活動,考試,10,題目,question,la question,Frage
+306,人文活動,考試,11,答案,answer,la réponse,Antwort
+307,人文活動,考試,12,成績,grade / score,la note,Note
+308,人文活動,考試,13,证书,certificate,le certificat,Zertifikat
+309,人文活動,考試,14,口試,oral exam,l’oral,mündliche Prüfung
+310,人文活動,考試,15,笔試,written exam,l’écrit,schriftliche Prüfung
+311,人文活動,語言,1,语言（阴性名词）,"language, tongue (n.)",la langue,die Sprache
+312,人文活動,語言,2,外国人（阳性名词）,"stranger, foreigner (n.)",l’étranger,der Ausländer
+313,人文活動,語言,3,中文,Chinese,le chinois,Chinesisch
+314,人文活動,語言,4,法国的（形容词）,French (adj.),français,französisch
+315,人文活動,語言,5,英文,English,l’anglais,Englisch
+316,人文活動,語言,6,單字,word,le mot,Wort
+317,人文活動,語言,7,字,letter,la lettre,Buchstabe
+318,人文活動,語言,8,句子,sentence,la phrase,Satz
+319,人文活動,語言,9,条款（阳性名词）,"article, item (n.)",l’article,der Artikel
+320,人文活動,語言,10,文本,text,le texte,Text
+321,人文活動,語言,11,语法（阴性名词）,grammar (n.),la grammaire,die Grammatik
+322,人文活動,語言,12,陰阳性,gender,le genre,Genus
+323,人文活動,語言,13,拼字,spelling,l’orthographe,Rechtschreibung
+324,人文活動,語言,14,翻譯,translation,la traduction,Übersetzung
+325,人文活動,語言,15,对話,dialogue,le dialogue,Dialog
+326,人文活動,語言,16,母語,mother tongue,la langue maternelle,Muttersprache
+327,人文活動,語言,17,重音（阳性名词）,accent (n.),l’accent,der Akzent
+328,人文活動,語言,18,意思,meaning,le sens,Bedeutung
+329,人文活動,語言,19,表达,expression,l’expression,Ausdruck
+330,人文活動,發音,1,发音,pronunciation,la prononciation,Aussprache
+331,人文活動,發音,2,嗓子,throat,la gorge,der Hals
+332,人文活動,發音,3,声音（阳性名词）,sound (n.),le son,der Ton
+333,人文活動,發音,4,音標,phonetic symbol,le symbole phonétique,Lautschriftzeichen
+334,人文活動,發音,5,节奏（阳性名词）,rhythm (n.),le rythme,der Rhythmus
+335,人文活動,發音,6,語调,intonation,l’intonation,Intonation
+336,人文活動,發音,7,母音,vowel,la voyelle,Vokal
+337,人文活動,發音,8,子音,consonant,la consonne,Konsonant
+338,人文活動,發音,9,連音,liaison,la liaison,die Liaison
+339,人文活動,國家,1,德国,Germany,l’Allemagne,Deutschland
+340,人文活動,國家,2,中国,China,la Chine,China
+341,人文活動,國家,3,西班牙,Spain,l’Espagne,Spanien
+342,人文活動,國家,4,美国,United States,les États-Unis,Vereinigte Staaten
+343,人文活動,國家,5,法国,France,la France,Frankreich
+344,人文活動,國家,6,義大利,Italy,l’Italie,Italien
+345,人文活動,國家,7,日本,Japan,le Japon,Japan
+346,人文活動,國家,8,英国,United Kingdom,le Royaume-Uni,Vereinigtes Königreich
+347,人文活動,國家,9,台灣,Taiwan,Taïwan,Taiwan
+348,人文活動,文件,1,文件（阳性名词）,document (n.),le document,das Dokument
+349,人文活動,文件,2,登記卡,registration form,la fiche d’inscription,Anmeldeformular
+350,人文活動,文件,3,差号,queue number,le numéro d’attente,Wartenummer
+351,人文活動,文件,4,表,form,le formulaire,Formular
+352,人文活動,文件,5,影本,copy,la copie,Kopie
+353,人文活動,文件,6,原始的（形容词）,original (adj.),original,original
+354,人文活動,文件,7,收據,receipt,le reçu,Quittung
+355,人文活動,商業,1,商业（阳性名词）,"trade, business (n.)",le commerce,der Handel
+356,人文活動,商業,2,經濟,economy / economics,l’économie,die Wirtschaft
+357,人文活動,商業,3,行銷,marketing,le marketing,Marketing
+358,人文活動,商業,4,社会（阴性名词）,"company, society (n.)",la société,die Gesellschaft
+359,人文活動,商業,5,客戶,client,le client,Kunde
+360,人文活動,銀行,1,银行卡（阴性名词）,bank card (n.),la carte bancaire,die Bankkarte
+361,人文活動,銀行,2,提款机,ATM,le distributeur,Geldautomat
+362,人文活動,銀行,3,支票（阳性名词）,cheque (n.),le chèque,der Scheck
+363,人文活動,銀行,4,银，货币，钱（阳性名 词）,money (n.),l’argent,das Geld
+364,人文活動,銀行,5,欧元（阳性名词）,euro (n.),l’euro,der Euro
+365,人文活動,銀行,6,小数點之後分錢,cent,le centime,Cent
+366,人文活動,銀行,7,票，门票（阳性名词）,ticket (n.),le billet,die Karte
+367,人文活動,銀行,8,货币（阴性名词）,currency (n.),la monnaie,die Währung
+368,人文活動,銀行,9,硬幣,coins,les pièces,Münzen
+369,人文活動,銀行,10,计数（阳性名词）,account (n.),le compte,das Konto
+370,人文活動,銀行,11,转账,bank transfer,le virement,Überweisung
+371,人文活動,銀行,12,密码（阳性名词）,password (n.),le mot de passe,das Passwort
+372,人文活動,銀行,13,付款,payment,le paiement,Zahlung
+373,人文活動,銀行,14,银行（阴性名词）,bank (n.),la banque,die Bank
+374,人文活動,銀行,15,柜台,counter / reception,le guichet,der Schalter
+375,人文活動,資訊,1,报纸（阳性名词）,newspaper (n.),le journal,die Zeitung
+376,人文活動,資訊,2,杂志（阳性名词）,magazine (n.),le magazine,das Magazin
+377,人文活動,資訊,3,新聞,news,les nouvelles,Nachrichten
+378,人文活動,文具,1,办公用品,office supplies,les fournitures de bureau,Bürobedarf
+379,人文活動,文具,2,剪刀（阳性名词复数）,scissors (n.pl.),les ciseaux,die Schere
+380,人文活動,文具,3,膠帶,tape,le ruban adhésif,Klebeband
+381,人文活動,文具,4,尺,ruler,la règle,Lineal
+382,人文活動,文具,5,计算机,calculator,la calculatrice,Taschenrechner
+383,人文活動,文具,6,橡皮擦,eraser,la gomme,Radiergummi
+384,人文活動,文具,7,鉛笔,pencil,le crayon,Bleistift
+385,人文活動,文具,8,钢笔（阳性名词）,pen (n.),le stylo-plume,der Füller
+386,人文活動,文具,9,笔記本,notebook,le cahier,Heft
+387,人文活動,文具,10,纸张(阳性名词),paper (n.),le papier,das Papier
+388,人文活動,文具,11,资料夾,folder / binder,le classeur,Ordner
+389,人文活動,文具,12,信封,envelope,l’enveloppe,Umschlag
+390,人文活動,文具,13,螢光笔,highlighter,le surligneur,Textmarker
+391,人文活動,身體,1,身体,body,le corps,der Körper
+392,人文活動,身體,2,头,head,la tête,der Kopf
+393,人文活動,身體,3,头发,hair,les cheveux,die Haare
+394,人文活動,身體,4,臉,face,le visage,das Gesicht
+395,人文活動,身體,5,鼻子,nose,le nez,die Nase
+396,人文活動,身體,6,嘴巴,mouth,la bouche,der Mund
+397,人文活動,身體,7,牙齒,teeth,les dents,die Zähne
+398,人文活動,身體,8,眼睛,eyes,les yeux,Augen
+399,人文活動,身體,9,耳朵,ear,l’oreille,Ohr
+400,人文活動,身體,10,脖子,neck,le cou,Hals
+401,人文活動,身體,11,语言（阴性名词）,"language, tongue (n.)",la langue,die Sprache
+402,人文活動,身體,12,手,hand,la main,Hand
+403,人文活動,身體,13,手臂,arm,le bras,Arm
+404,人文活動,身體,14,腿,leg,la jambe,Bein
+405,人文活動,身體,15,脚,foot,le pied,Fuß
+406,人文活動,身體,16,背,back,le dos,Rücken
+407,人文活動,身體,17,肚子,belly,le ventre,Bauch
+408,人文活動,身體,18,心臟,heart,le cœur,Herz
+409,人文活動,身體,19,膝蓋,knee,le genou,Knie
+410,人文活動,身體,20,手指,finger,le doigt,Finger
+411,人文活動,身體,21,肩膀,shoulder,l’épaule,Schulter
+412,人文活動,顏色,1,颜色,color,la couleur,Farbe
+413,人文活動,顏色,2,红色,red,rouge,rot
+414,人文活動,顏色,3,橙色,orange,orange,orange
+415,人文活動,顏色,4,黄色的（形容词）,yellow (adj.),jaune,gelb
+416,人文活動,顏色,5,绿色,green,vert,grün
+417,人文活動,顏色,6,蓝色的（形容词）,blue (adj.),bleu,blau
+418,人文活動,顏色,7,紫色,purple,violet,violett
+419,人文活動,顏色,8,黑的（形容词）,black (adj.),noir,schwarz
+420,人文活動,顏色,9,白色的（形容词）,white (adj.),blanc,weiß
+421,人文活動,顏色,10,灰色的（形容词）,grey (adj.),gris,grau
+422,氣象地理交通,天空天氣,1,天空,sky,le ciel,Himmel
+423,氣象地理交通,天空天氣,2,星星,star,l’étoile,Stern
+424,氣象地理交通,天空天氣,3,月亮,moon,la lune,Mond
+425,氣象地理交通,天空天氣,4,太阳（阳性名词）,sun (n.),le soleil,die Sonne
+426,氣象地理交通,天空天氣,5,气象,weather forecast,la météo,Wetterbericht
+427,氣象地理交通,天空天氣,6,气候,climate,le climat,Klima
+428,氣象地理交通,天空天氣,7,天气,weather,le temps,Wetter
+429,氣象地理交通,天空天氣,8,温度（阴性名词）,temperature (n.),la température,die Temperatur
+430,氣象地理交通,天空天氣,9,冷的感覺,cold,le froid,Kälte
+431,氣象地理交通,天空天氣,10,熱的感覺,heat,la chaleur,Hitze
+432,氣象地理交通,天空天氣,11,雨,rain,la pluie,Regen
+433,氣象地理交通,天空天氣,12,雪,snow,la neige,Schnee
+434,氣象地理交通,天空天氣,13,风（阳性名词）,wind (n.),le vent,der Wind
+435,氣象地理交通,天空天氣,14,雲,cloud,le nuage,Wolke
+436,氣象地理交通,天空天氣,15,霧,fog,le brouillard,Nebel
+437,氣象地理交通,天空天氣,16,暴風雨,storm,l’orage,Gewitter
+438,氣象地理交通,天空天氣,17,彩虹,rainbow,l’arc-en-ciel,Regenbogen
+439,氣象地理交通,天空天氣,18,度数,degree,le degré,Grad
+440,氣象地理交通,方位,1,方向,direction,la direction,Richtung
+441,氣象地理交通,方位,2,東,east,l’est,Osten
+442,氣象地理交通,方位,3,西,west,l’ouest,Westen
+443,氣象地理交通,方位,4,南（阳性名词）,south (n.),le sud,der Süden
+444,氣象地理交通,方位,5,北,north,le nord,Norden
+445,氣象地理交通,方位,6,中心（阳性名词）,centre (n.),le centre,das Zentrum
+446,氣象地理交通,地區,1,地区（阴性名词）,region (n.),la région,die Region
+447,氣象地理交通,地區,2,区（阳性名词）,district (n.),le quartier,der Stadtteil
+448,氣象地理交通,地區,3,行政区（阳性名词）,arrondissement (n.),l’arrondissement,der Stadtbezirk
+449,氣象地理交通,地理,1,自然,nature,la nature,Natur
+450,氣象地理交通,地理,2,盆地,basin,le bassin,Becken
+451,氣象地理交通,地理,3,山（阴性名词）,mountain (n.),la montagne,der Berg
+452,氣象地理交通,地理,4,丘陵,hill,la colline,Hügel
+453,氣象地理交通,地理,5,森林（阴性名词）,forest (n.),la forêt,der Wald
+454,氣象地理交通,地理,6,湖（阳性名词）,lake (n.),le lac,der See
+455,氣象地理交通,地理,7,河（阴性名词）,river (n.),la rivière,der Fluss
+456,氣象地理交通,地理,8,海（阴性名词）,sea (n.),la mer,das Meer
+457,氣象地理交通,地理,9,岛（阴性名词）,island (n.),l’île,die Insel
+458,氣象地理交通,地理,10,沙滩（阴性名词）,beach (n.),la plage,der Strand
+459,氣象地理交通,地理,11,田野,field,le champ,Feld
+460,氣象地理交通,四大洋,1,太平洋,Pacific Ocean,l’océan Pacifique,Pazifischer Ozean
+461,氣象地理交通,四大洋,2,大西洋,Atlantic Ocean,l’océan Atlantique,Atlantischer Ozean
+462,氣象地理交通,四大洋,3,印度洋,Indian Ocean,l’océan Indien,Indischer Ozean
+463,氣象地理交通,四大洋,4,北冰洋,Arctic Ocean,l’océan Arctique,Arktischer Ozean
+464,氣象地理交通,七大洲,1,亞洲,Asia,l’Asie,Asien
+465,氣象地理交通,七大洲,2,歐洲,Europe,l’Europe,Europa
+466,氣象地理交通,七大洲,3,北美洲,North America,l’Amérique du Nord,Nordamerika
+467,氣象地理交通,七大洲,4,南美洲,South America,l’Amérique du Sud,Südamerika
+468,氣象地理交通,七大洲,5,非洲,Africa,l’Afrique,Afrika
+469,氣象地理交通,七大洲,6,大洋洲,Oceania,l’Océanie,Ozeanien
+470,氣象地理交通,七大洲,7,南極洲,Antarctica,l’Antarctique,Antarktis
+471,氣象地理交通,測量,1,深度,depth,la profondeur,Tiefe
+472,氣象地理交通,測量,2,寬度,width,la largeur,Breite
+473,氣象地理交通,測量,3,高度,height,la hauteur,Höhe
+474,氣象地理交通,測量,4,长度,length,la longueur,Länge
+475,氣象地理交通,交通,1,运输（阳性名词）,transport (n.),le transport,der Transport
+476,氣象地理交通,交通,2,自行车（阳性名词）,bike (n.),le vélo,das Fahrrad
+477,氣象地理交通,交通,3,自行车（阳性名词）,bike (n.),le vélo,das Fahrrad
+478,氣象地理交通,交通,4,摩托车,motorcycle,la moto,Motorrad
+479,氣象地理交通,交通,5,汽车（阴性名词）,car (n.),la voiture,das Auto
+480,氣象地理交通,交通,6,公交车,bus,le bus,Bus
+481,氣象地理交通,交通,7,长途巴士,coach,l’autocar,Reisebus
+482,氣象地理交通,交通,8,接驳车,shuttle,la navette,Shuttlebus
+483,氣象地理交通,交通,9,地铁（阳性名词）,metro (n.),le métro,die U-Bahn
+484,氣象地理交通,交通,10,火车（阳性名词）,train (n.),le train,der Zug
+485,氣象地理交通,交通,11,飞机（阳性名词）,plane (n.),l’avion,das Flugzeug
+486,氣象地理交通,交通,12,航班,flight,le vol,Flug
+487,氣象地理交通,交通,13,船,boat,le bateau,das Boot
+488,氣象地理交通,交通,14,邮輪,cruise,la croisière,Kreuzfahrt
+489,氣象地理交通,交通,15,机场,airport,l’aéroport,Flughafen
+490,氣象地理交通,交通,16,停靠站,stop,l’arrêt,Haltestelle
+491,氣象地理交通,交通,17,车站（阴性名词）,station (n.),la gare,der Bahnhof
+492,氣象地理交通,交通,18,车站（阴性名词）,station (n.),la gare,der Bahnhof
+493,氣象地理交通,交通,19,月台/碼头,platform / quay,le quai,der Bahnsteig
+494,氣象地理交通,交通,20,票，门票（阳性名词）,ticket (n.),le billet,die Karte
+495,氣象地理交通,交通,21,车票,ticket,le ticket,die Fahrkarte
+496,氣象地理交通,交通,22,在线（阴性名词）,line (on) (n.),la ligne,die Linie
+497,氣象地理交通,交通,23,时间表（阳性名词）,timetable (n.),l’horaire,der Zeitplan
+498,氣象地理交通,交通,24,乘客（阳性名词）,passenger (n.),le passager,der Passagier
+499,氣象地理交通,交通,25,司机,driver,le conducteur,der Fahrer
+500,氣象地理交通,交通,26,驾照,driver’s license,le permis,der Führerschein
+501,氣象地理交通,交通,27,红绿灯（阳性名词）,traffic light (n.),le feu de circulation,die Ampel
+502,氣象地理交通,交通,28,道路,road,la route,Straße
+503,氣象地理交通,交通,29,高速公路,highway,l’autoroute,Autobahn
+504,氣象地理交通,交通,30,出租车（阳性名词）,taxi (n.),le taxi,das Taxi
+505,氣象地理交通,交通,31,行程,route / journey,le trajet,die Strecke
+506,氣象地理交通,交通,32,换乘,connection / transfer,la correspondance,der Anschluss
+507,氣象地理交通,交通,33,广场（阴性名词）,square (n.),la place,der Platz
+508,氣象地理交通,交通,34,行李,luggage,le bagage,Gepäck
+509,氣象地理交通,交通,35,离开，出发（阳性名词）,departure (n.),le départ,die Abfahrt
+510,氣象地理交通,交通,36,到达,arrival,l’arrivée,Ankunft
+511,氣象地理交通,交通,37,延误,delay,le retard,Verspätung
+512,氣象地理交通,交通,38,交通堵塞,traffic jam,l’embouteillage,Stau
+513,氣象地理交通,地圖,1,菜单，卡片（阴性名词）,"menu, card (n.)",la carte,die Karte
+514,氣象地理交通,地圖,2,国家（阳性名词）,country (n.),le pays,das Land
+515,氣象地理交通,地圖,3,城市（阴性名词）,town (n.),la ville,die Stadt
+516,氣象地理交通,地圖,4,乡村（阳性名词）,village (n.),le village,das Dorf
+517,氣象地理交通,地圖,5,首都（阴性名词）,capital (n.),la capitale,die Hauptstadt
+518,氣象地理交通,地圖,6,区（阳性名词）,district (n.),le quartier,der Stadtteil
+519,氣象地理交通,地圖,7,地址（阴性名词）,address (n.),l’adresse,die Adresse
+520,氣象地理交通,地圖,8,路線圖,map / plan,le plan,der Plan
+521,氣象地理交通,地方,1,地方,place,le lieu,Ort
+522,氣象地理交通,地方,2,场所,place / location,l’endroit,der Ort
+523,氣象地理交通,郵寄,1,岗位（阳性名词）,post (n.),la poste,die Post
+524,氣象地理交通,郵寄,2,邮件,mail,le courrier,Post
+525,氣象地理交通,郵寄,3,明信片,postcard,la carte postale,Postkarte
+526,氣象地理交通,郵寄,4,信/字母,letter,la lettre,der Brief
+527,氣象地理交通,郵寄,5,信封,envelope,l’enveloppe,Umschlag
+528,氣象地理交通,郵寄,6,回邮信封,prepaid return envelope,l’enveloppe préaffranchie,freigemachter Rückumschlag
+529,氣象地理交通,郵寄,7,箱子,parcel / box,le colis,das Paket
+530,氣象地理交通,郵寄,8,邮票,stamp,le timbre,Briefmarke
+531,氣象地理交通,郵寄,9,包裹,parcel,le paquet,Paket
+532,氣象地理交通,郵寄,10,地址（阴性名词）,address (n.),l’adresse,die Adresse
+533,氣象地理交通,郵寄,11,寄件人,sender,l’expéditeur,der Absender
+534,氣象地理交通,郵寄,12,收件人,recipient,le destinataire,der Empfänger
+535,氣象地理交通,郵寄,13,投递,delivery,la livraison,Zustellung
+536,氣象地理交通,郵寄,14,邮差,postman,le facteur,der Briefträger
+537,氣象地理交通,旅行,1,假期（阴性名词复数）,holiday (n.),les vacances,die Ferien
+538,氣象地理交通,旅行,2,休假,leave / vacation,le congé,Urlaub
+539,氣象地理交通,旅行,3,旅行（阳性名词）,trip (n.),le voyage,die Reise
+540,氣象地理交通,旅行,4,乘客（阳性名词）,passenger (n.),le passager,der Passagier
+541,氣象地理交通,旅行,5,行李箱,suitcase,la valise,Koffer
+542,氣象地理交通,旅行,6,转接器,adapter,l’adaptateur,Adapter
+543,氣象地理交通,旅行,7,专科，专业（阴性名词）,speciality (n.),la spécialité,die Spezialität
+544,氣象地理交通,旅行,8,旅遊行程,itinerary,l’itinéraire,Reiseplan
+545,氣象地理交通,旅行,9,护照,passport,le passeport,der Reisepass
+546,氣象地理交通,旅行,10,签证,visa,le visa,das Visum
+547,氣象地理交通,旅行,11,導遊,guide,le guide,der Reiseführer
+548,氣象地理交通,旅行,12,旅遊局,tourist office,l’office de tourisme,Touristeninformation
+549,氣象地理交通,旅行,13,记忆（阳性名词）,"memory, souvenir (n.)",le souvenir,die Erinnerung
+550,氣象地理交通,旅行,14,预約,reservation,la réservation,Reservierung
+551,娛樂建築,購物,1,购物,shopping,le shopping,Einkaufen
+552,娛樂建築,購物,2,折扣活动,sales,les soldes,Schlussverkauf
+553,娛樂建築,購物,3,购买（阳性名词）,purchase (n.),l’achat,der Kauf
+554,娛樂建築,購物,4,预算,budget,le budget,Budget
+555,娛樂建築,購物,5,订单,order,la commande,Bestellung
+556,娛樂建築,購物,6,账单,bill / invoice,la facture,Rechnung
+557,娛樂建築,購物,7,收據,receipt,le reçu,Quittung
+558,娛樂建築,購物,8,价格（阳性名词）,"price, award (n.)",le prix,der Preis
+559,娛樂建築,購物,9,现金,cash,les espèces,Bargeld
+560,娛樂建築,購物,10,银行卡（阴性名词）,bank card (n.),la carte bancaire,die Bankkarte
+561,娛樂建築,購物,11,产品（阳性名词）,product (n.),le produit,das Produkt
+562,娛樂建築,購物,12,尺寸,size,la taille,Größe
+563,娛樂建築,購物,13,试衣间,fitting room,la cabine d’essayage,Umkleidekabine
+564,娛樂建築,旅館,1,宾馆（阳性名词）,hotel (n.),l’hôtel,das Hotel
+565,娛樂建築,旅館,2,青年旅馆,youth hostel,l’auberge de jeunesse,Jugendherberge
+566,娛樂建築,旅館,3,预订,reservation,la réservation,Reservierung
+567,娛樂建築,旅館,4,酒店入住,check-in,l’enregistrement,Einchecken
+568,娛樂建築,旅館,5,房间钥匙,room key,la clé,Zimmerschlüssel
+569,娛樂建築,旅館,6,柜台,counter / reception,la réception,die Rezeption
+570,娛樂建築,旅館,7,离开，出发（阳性名词）,departure (n.),le départ,die Abfahrt
+571,娛樂建築,電影,1,历史（阴性名词）,history (n.),l’histoire,die Geschichte
+572,娛樂建築,電影,2,电影（阴性名词）,cinema (n.),le cinéma,das Kino
+573,娛樂建築,電影,3,电影（阳性名词）,film (n.),le film,der Film
+574,娛樂建築,電影,4,剧情片,drama,le drame,Drama
+575,娛樂建築,電影,5,喜剧（阴性名词）,comedy (n.),la comédie,die Komödie
+576,娛樂建築,電影,6,音乐剧,musical,la comédie musicale,Musical
+577,娛樂建築,電影,7,演员（阳性名词）,actor (n.),l’acteur,der Schauspieler
+578,娛樂建築,電影,8,导演,director,le réalisateur,der Regisseur
+579,娛樂建築,電影,9,字幕,subtitles,les sous-titres,Untertitel
+580,娛樂建築,電影,10,票房,box office,le box-office,die Kinokasse
+581,娛樂建築,電影,11,会议（阴性名词）,session (n.),la séance,die Sitzung
+582,娛樂建築,店鋪,1,店铺,shop,la boutique,Laden
+583,娛樂建築,店鋪,2,商店,store,le magasin,Geschäft
+584,娛樂建築,店鋪,3,开门,opening,l’ouverture,Öffnung
+585,娛樂建築,店鋪,4,关门,closing,la fermeture,Schließung
+586,娛樂建築,店鋪,5,银行（阴性名词）,bank (n.),la banque,die Bank
+587,娛樂建築,店鋪,6,药店,pharmacy,la pharmacie,Apotheke
+588,娛樂建築,店鋪,7,报刊亭,kiosk,le kiosque,Kiosk
+589,娛樂建築,店鋪,8,书店,bookstore,la librairie,Buchhandlung
+590,娛樂建築,店鋪,9,文具店（阴性名词）,stationery store (n.),la papeterie,die Papierhandlung
+591,娛樂建築,店鋪,10,理发店,hair salon,le salon de coiffure,Friseursalon
+592,娛樂建築,店鋪,11,花店,florist,le fleuriste,Blumenladen
+593,娛樂建築,店鋪,12,面包店（阴性名词）,bakery (n.),la boulangerie,die Bäckerei
+594,娛樂建築,店鋪,13,肉店,butcher shop,la boucherie,Metzgerei
+595,娛樂建築,店鋪,14,鱼店,fish shop,la poissonnerie,Fischgeschäft
+596,娛樂建築,店鋪,15,超市（阳性名词）,supermarket (n.),le supermarché,der Supermarkt
+597,娛樂建築,店鋪,16,市场,market,le marché,Markt
+598,娛樂建築,店鋪,17,服装店,clothing store,le magasin de vêtements,Bekleidungsgeschäft
+599,娛樂建築,店鋪,18,鞋店,shoe store,le magasin de chaussures,Schuhgeschäft
+600,娛樂建築,店鋪,19,珠宝店,jewelry store,la bijouterie,Juweliergeschäft
+601,娛樂建築,店鋪,20,杂货店,grocery store,l’épicerie,Lebensmittelgeschäft
+602,娛樂建築,店鋪,21,洗衣店,laundromat,la laverie,Waschsalon
+603,娛樂建築,吃店,1,饭店（阳性名词）,restaurant (n.),le restaurant,das Restaurant
+604,娛樂建築,吃店,2,小酒馆,bistro,le bistrot,Bistro
+605,娛樂建築,吃店,3,餐馆/酒馆,brasserie,la brasserie,Brasserie
+606,娛樂建築,吃店,4,下午茶店,tea room,le salon de thé,Teesalon
+607,娛樂建築,吃店,5,咖啡（阳性名词）,"coffee, café (n.)",le café,der Kaffee
+608,娛樂建築,吃店,6,酒吧,bar,le bar,Bar
+609,娛樂建築,吃店,7,快餐店,fast food restaurant,le fast-food,Fast-Food-Restaurant
+610,娛樂建築,吃店,8,面包咖啡店,bakery café,la boulangerie-café,Bäckerei-Café
+611,娛樂建築,吃店,9,外帶店,takeaway,la vente à emporter,der Imbiss
+612,娛樂建築,吃店,10,糕点（阴性名词）,cake shop (n.),la pâtisserie,die Konditorei
+613,娛樂建築,公設,1,市中心,city center,le centre-ville,Stadtzentrum
+614,娛樂建築,公設,2,公园(阳性名词),park (n.),le parc,der Park
+615,娛樂建築,公設,3,花园（阳性名词）,garden (n.),le jardin,der Garten
+616,娛樂建築,公設,4,图书馆（阴性名词）,library (n.),la bibliothèque,die Bibliothek
+617,娛樂建築,公設,5,游泳池,swimming pool,la piscine,Schwimmbad
+618,娛樂建築,公設,6,停车场(阳性名词),car park (n.),le parking,der Parkplatz
+619,娛樂建築,公設,7,市政府（阴性名词）,town hall (n.),la mairie,das Rathaus
+620,娛樂建築,公設,8,大教堂（阴性名词）,cathedral (n.),la cathédrale,die Kathedrale
+621,娛樂建築,公設,9,小教堂,chapel,la chapelle,Kapelle
+622,娛樂建築,公設,10,医院（阳性名词）,hospital (n.),l’hôpital,das Krankenhaus
+623,娛樂建築,公設,11,警察局,police station,le commissariat,Polizeiwache
+624,娛樂建築,公設,12,学校,school,l’école,Schule
+625,娛樂建築,公設,13,博物馆（阳性名词）,museum (n.),le musée,das Museum
+626,娛樂建築,公設,14,剧院（阳性名词）,theatre (n.),le théâtre,das Theater
+627,娛樂建築,公設,15,邮局（阴性名词）,post office (n.),la poste,die Post
+628,娛樂建築,公設,16,车站（阴性名词）,station (n.),la gare,der Bahnhof
+629,娛樂建築,公設,17,体育馆,gymnasium,le gymnase,Sporthalle
+630,娛樂建築,街道,1,路徑车道,lane / way,la voie,die Spur
+631,娛樂建築,街道,2,行人,pedestrian,le piéton,der Fußgänger
+632,娛樂建築,街道,3,大马路，林荫大道（阳性 名词）,boulevard (n.),le boulevard,der Boulevard
+633,娛樂建築,街道,4,大街（阴性名词）,avenue (n.),l’avenue,die Allee
+634,娛樂建築,街道,5,路,road,la route,Straße
+635,娛樂建築,街道,6,街道（阴性名词）,street (n.),la rue,die Straße
+636,娛樂建築,街道,7,巷,alley,la ruelle,Gasse
+637,娛樂建築,街道,8,十字路口,intersection,le carrefour,Kreuzung
+638,娛樂建築,街道,9,人行道,sidewalk,le trottoir,Gehweg
+639,娛樂建築,街道,10,斑馬線,pedestrian crossing,le passage piéton,Zebrastreifen
+640,娛樂建築,街道,11,桥（阳性名词）,bridge (n.),le pont,die Brücke
+641,娛樂建築,街道,12,广场（阴性名词）,square (n.),la place,der Platz
+642,娛樂建築,街道,13,圓環,roundabout,le rond-point,Kreisverkehr
+643,娛樂建築,街道,14,火（阳性名词）,fire (n.),le feu,das Feuer
+644,娛樂建築,街道,15,路牌,road sign,le panneau,Straßenschild
+645,娛樂建築,建廳,1,（楼房的）层（阳性名 词）,floor (n.),l’étage,das Geschoss
+646,娛樂建築,建廳,2,墙壁,wall,le mur,Wand
+647,娛樂建築,建廳,3,屋顶,roof,le toit,Dach
+648,娛樂建築,建廳,4,地板,floor,le sol,Boden
+649,娛樂建築,建廳,5,门（阴性名词）,door (n.),la porte,die Tür
+650,娛樂建築,建廳,6,片（阴性名词）,"room, piece (n.)",la pièce,das Zimmer
+651,娛樂建築,建廳,7,间,room,la chambre,Zimmer
+652,娛樂建築,建廳,8,片（阴性名词）,"room, piece (n.)",la pièce,das Zimmer
+653,娛樂建築,建廳,9,洗手间（阴性名词复数）,toilets (n.pl.),les toilettes,die Toiletten
+654,娛樂建築,建廳,10,浴室（阴性名词）,bathroom (n.),la salle de bain,das Badezimmer
+655,娛樂建築,建廳,11,客厅（阳性名词）,living room (n.),le salon,das Wohnzimmer
+656,娛樂建築,建廳,12,厨房（阴性名词）,"kitchen, cuisine (n.)",la cuisine,die Küche
+657,娛樂建築,建廳,13,套房,suite,la suite,Suite
+658,娛樂建築,建廳,14,"走廊,通道(阳性名词)",corridor (n.),le couloir,der Flur
+659,娛樂建築,建廳,15,楼梯（阳性名词）,staircase (n.),l’escalier,die Treppe
+660,娛樂建築,建廳,16,车库（阳性名词）,garage (n.),le garage,die Garage
+661,娛樂建築,建廳,17,阳台（阳性名词）,balcony (n.),le balcon,der Balkon
+662,娛樂建築,建廳,18,平台（阴性名词）,terrace (n.),la terrasse,die Terrasse
+663,娛樂建築,建廳,19,院子,yard / courtyard,la cour,Hof
+664,娛樂建築,建廳,20,电梯（阳性名词）,lift (n.),l’ascenseur,der Aufzug
+665,娛樂建築,建廳,21,單间公寓,studio apartment,le studio,die Einzimmerwohnung
+666,娛樂建築,建廳,22,公寓,apartment,l’appartement,Wohnung
+667,娛樂建築,建廳,23,房屋（阴性名词）,house (n.),la maison,das Haus
+668,娛樂建築,建廳,24,住宅,housing / dwelling,le logement,die Wohnung
+669,娛樂建築,建廳,25,住宿（动词）,"put up, house (v.)",loger,übernachten
+670,娛樂建築,建廳,26,建筑物,building,le bâtiment,Gebäude
+671,娛樂建築,建廳,27,租金（阳性名词）,rent (n.),le loyer,die Miete
+672,娛樂建築,樓層,1,底层（阳性名词）,ground floor (n.),le rez-de-chaussée,das Erdgeschoss
+673,娛樂建築,樓層,2,地下室,basement,le sous-sol,Keller
+674,娛樂建築,家事,1,家事,housework,le ménage,Hausarbeit
+675,娛樂建築,家事,2,修修弄弄,DIY / repairs,le bricolage,Heimwerken
+676,娛樂建築,家事,3,洗衣服,laundry,la lessive,Wäsche
+677,娛樂建築,傢俱,1,家具（阳性名词）,furniture (n.),les meubles,die Möbel
+678,娛樂建築,傢俱,2,物体，对象（阳性名词）,object (n.),l’objet,der Gegenstand
+679,娛樂建築,傢俱,3,事情（阴性名词）,thing (n.),la chose,die Sache
+680,娛樂建築,傢俱,4,設備,equipment,l’équipement,Ausstattung
+681,娛樂建築,傢俱,5,时鐘,clock,l’horloge,Uhr
+682,娛樂建築,傢俱,6,桌子,table,la table,Tisch
+683,娛樂建築,傢俱,7,办公室（阳性名词）,office (n.),le bureau,das Büro
+684,娛樂建築,傢俱,8,椅子,chair,la chaise,Stuhl
+685,娛樂建築,傢俱,9,长沙发（阳性名词）,couch (n.),le canapé,das Sofa
+686,娛樂建築,傢俱,10,扶手椅（阳性名词）,armchair (n.),le fauteuil,der Sessel
+687,娛樂建築,傢俱,11,柜子,wardrobe / cabinet,l’armoire,Schrank
+688,娛樂建築,傢俱,12,书架,shelf,l’étagère,Regal
+689,娛樂建築,傢俱,13,床头柜,bedside table,la table de nuit,Nachttisch
+690,娛樂建築,傢俱,14,抽屉,drawer,le tiroir,Schublade
+691,娛樂建築,傢俱,15,衣柜,wardrobe,la penderie,Kleiderschrank
+692,娛樂建築,傢俱,16,地毯（阳性名词）,rug (n.),le tapis,der Teppich
+693,娛樂建築,傢俱,17,窗帘,curtain,le rideau,Vorhang
+694,娛樂建築,傢俱,18,鏡子,mirror,le miroir,Spiegel
+695,娛樂建築,傢俱,19,灯（阴性名词）,lamp (n.),la lampe,die Lampe
+696,娛樂建築,房間,1,床（阳性名词）,bed (n.),le lit,das Bett
+697,娛樂建築,房間,2,枕头（阳性名词）,pillow (n.),l’oreiller,das Kopfkissen
+698,娛樂建築,房間,3,羽绒被(阴性名词),duvet (n.),la couette,die Steppdecke
+699,娛樂建築,浴室,1,浴缸，浴盆（阴性名词）,bathtub (n.),la baignoire,die Badewanne
+700,娛樂建築,浴室,2,淋浴（阴性名词）,shower (n.),la douche,die Dusche
+701,娛樂建築,浴室,3,鏡子,mirror,le miroir,Spiegel
+702,娛樂建築,浴室,4,肥皂,soap,le savon,Seife
+703,娛樂建築,浴室,5,洗发精,shampoo,le shampooing,Shampoo
+704,娛樂建築,浴室,6,毛巾,towel,la serviette,Handtuch
+705,娛樂建築,浴室,7,牙刷,toothbrush,la brosse à dents,Zahnbürste
+706,娛樂建築,浴室,8,牙膏,toothpaste,le dentifrice,Zahnpasta
+707,娛樂建築,浴室,9,洗手台,washbasin,le lavabo,Waschbecken
+708,娛樂建築,浴室,10,洗手间（阴性名词复数）,toilets (n.pl.),les toilettes,die Toiletten
+709,娛樂建築,藝擺,1,广告（阴性名词）,advertisement (n.),la publicité,die Werbung
+710,娛樂建築,藝擺,2,图表（阳性名词）,table (n.),le tableau,die Tabelle
+711,娛樂建築,藝擺,3,圖畫,drawing,le dessin,Zeichnung
+712,娛樂建築,藝擺,4,雕像,statue,la statue,Statue
+713,娛樂建築,藝擺,5,花瓶,vase,le vase,Vase
+714,娛樂建築,藝擺,6,裝饰,decoration,la décoration,Dekoration
+715,娛樂建築,電器,1,器具,device / appliance,l’appareil,Gerät
+716,娛樂建築,電器,2,答錄机,answering machine,le répondeur,Anrufbeantworter
+717,娛樂建築,電器,3,充电器,charger,le chargeur,Ladegerät
+718,娛樂建築,電器,4,灯（阴性名词）,lamp (n.),la lampe,die Lampe
+719,娛樂建築,電器,5,灯泡（阴性名词）,bulb (n.),l’ampoule,die Glühbirne
+720,娛樂建築,電器,6,电脑（阳性名词）,computer (n.),l’ordinateur,der Computer
+721,娛樂建築,電器,7,平板电脑,tablet,la tablette,Tablet
+722,娛樂建築,電器,8,电视（阴性名词）,TV (n.),la télévision,der Fernseher
+723,娛樂建築,電器,9,无线广播（阴性名词）,radio (n.),la radio,das Radio
+724,娛樂建築,電器,10,手机,mobile phone,le téléphone portable,das Handy
+725,娛樂建築,電器,11,冰箱,refrigerator,le réfrigérateur,Kühlschrank
+726,娛樂建築,電器,12,洗衣机,washing machine,la machine à laver,Waschmaschine
+727,娛樂建築,電器,13,炉子（阳性名词）,oven (n.),le four,der Backofen
+728,娛樂建築,電器,14,微波炉,microwave,le micro-ondes,Mikrowelle
+729,娛樂建築,電器,15,吹风机,hair dryer,le sèche-cheveux,Föhn
+730,娛樂建築,電器,16,吸尘器,vacuum cleaner,l’aspirateur,Staubsauger
+731,娛樂建築,電器,17,空调,air conditioning,la climatisation,Klimaanlage
+732,娛樂建築,電器,18,遥控器,remote control,la télécommande,Fernbedienung
+733,娛樂建築,材質,1,成分元素,element,l’élément,Element
+734,娛樂建築,材質,2,木头,wood,le bois,Holz
+735,娛樂建築,材質,3,铁,iron,le fer,Eisen
+736,娛樂建築,材質,4,皮,leather,le cuir,Leder
+737,娛樂建築,材質,5,塑膠,plastic,le plastique,der Kunststoff
+738,娛樂建築,材質,6,玻璃（阳性名词）,glass (n.),le verre,das Glas
+739,娛樂建築,材質,7,纸张(阳性名词),paper (n.),le papier,das Papier
+740,娛樂建築,尺寸,1,尺寸,size,la taille,Größe
+741,娛樂建築,尺寸,2,尺碼,shoe size,la pointure,Schuhgröße
+742,娛樂建築,尺寸,3,重量,weight,le poids,Gewicht
+743,服飾健康,飾品,1,配饰,accessory,l’accessoire,Accessoire
+744,服飾健康,飾品,2,模式（阴性名词）,fashion (n.),la mode,die Mode
+745,服飾健康,飾品,3,风格（阳性名词）,style (n.),le style,der Stil
+746,服飾健康,飾品,4,手套,gloves,les gants,Handschuhe
+747,服飾健康,飾品,5,手镯，链子（阳性名词）,bracelet (n.),le bracelet,das Armband
+748,服飾健康,飾品,6,戒指,ring,la bague,Ring
+749,服飾健康,飾品,7,手錶,watch,la montre,Uhr
+750,服飾健康,飾品,8,皮带，腰带（阴性名词）,belt (n.),la ceinture,der Gürtel
+751,服飾健康,飾品,9,帽子（阳性名词）,hat (n.),le chapeau,der Hut
+752,服飾健康,飾品,10,领带（阴性名词）,tie (n.),la cravate,die Krawatte
+753,服飾健康,飾品,11,太阳眼鏡,sunglasses,les lunettes de soleil,Sonnenbrille
+754,服飾健康,頭飾,1,眼鏡,glasses,les lunettes,Brille
+755,服飾健康,頭飾,2,耳環,earrings,les boucles d’oreilles,Ohrringe
+756,服飾健康,頭飾,3,项链（阳性名词）,necklace (n.),le collier,die Halskette
+757,服飾健康,頭飾,4,围巾（阳性名词）,scarf (n.),l’écharpe,der Schal
+758,服飾健康,頭飾,5,帽子（阳性名词）,hat (n.),le chapeau,der Hut
+759,服飾健康,頭飾,6,发帶,headband,le bandeau,Haarband
+760,服飾健康,頭飾,7,发夾,hair clip,la barrette,Haarspange
+761,服飾健康,頭飾,8,口罩,mask,le masque,Maske
+762,服飾健康,腳飾,1,絲襪,tights,le collant,Strumpfhose
+763,服飾健康,腳飾,2,短筒袜（阴性名词复数）,socks (n.pl.),les chaussettes,die Socken
+764,服飾健康,腳飾,3,鞋子,shoes,les chaussures,Schuhe
+765,服飾健康,腳飾,4,靴子,boots,les bottes,Stiefel
+766,服飾健康,包包,1,包,bag,le sac,Tasche
+767,服飾健康,包包,2,手提包,handbag,le sac à main,Handtasche
+768,服飾健康,包包,3,背包,backpack,le sac à dos,Rucksack
+769,服飾健康,衣服,1,衣服,clothing,le vêtement,Kleidung
+770,服飾健康,衣服,2,衣物,clothes,les habits,Kleider
+771,服飾健康,衣服,3,服装(阳性名词),"costume, suit (n.)",le costume,der Anzug
+772,服飾健康,衣服,4,连衣裙（阴性名词）,dress (n.),la robe,das Kleid
+773,服飾健康,衣服,5,襯衫,shirt,la chemise,Hemd
+774,服飾健康,衣服,6,T恤,T-shirt,le t-shirt,T-Shirt
+775,服飾健康,衣服,7,裙子（阴性名词）,skirt (n.),la jupe,der Rock
+776,服飾健康,衣服,8,上装（阴性名词）,jacket (n.),la veste,die Jacke
+777,服飾健康,衣服,9,大衣，外套（阳性名词）,coat (n.),le manteau,der Mantel
+778,服飾健康,保暖,1,套衫（阳性名词）,jumper (n.),le pull,der Pullover
+779,服飾健康,保暖,2,背心,vest / cardigan,le gilet,die Weste
+780,服飾健康,保暖,3,羽絨衣,down jacket,la doudoune,Daunenjacke
+781,服飾健康,保暖,4,毛衣,sweater,le chandail,Pullover
+782,服飾健康,保暖,5,圍脖,neck warmer,le tour de cou,Schlauchschal
+783,服飾健康,褲子,1,长裤(阳性名词),trousers (n.pl.),le pantalon,die Hose
+784,服飾健康,褲子,2,牛仔裤,jeans,le jean,Jeans
+785,服飾健康,褲子,3,短裤,shorts,le short,Shorts
+786,服飾健康,化妝保養,1,美容品,beauty products,les cosmétiques,Kosmetikprodukte
+787,服飾健康,化妝保養,2,化妆品,makeup,le maquillage,Make-up
+788,服飾健康,化妝保養,3,口红,lipstick,le rouge à lèvres,Lippenstift
+789,服飾健康,化妝保養,4,指甲油,nail polish,le vernis à ongles,Nagellack
+790,服飾健康,化妝保養,5,香水(阳性名词),perfume (n.),le parfum,das Parfum
+791,服飾健康,化妝保養,6,乳液,lotion,la lotion,Lotion
+792,服飾健康,化妝保養,7,面霜,face cream,la crème,Gesichtscreme
+793,服飾健康,化妝保養,8,防曬乳,sunscreen,la crème solaire,Sonnencreme
+794,服飾健康,化妝保養,9,洗面乳,facial cleanser,le nettoyant visage,Gesichtsreiniger
+795,服飾健康,醫藥,1,药,medicine,le médicament,Medikament
+796,服飾健康,醫藥,2,处方籤,prescription,l’ordonnance,Rezept
+797,服飾健康,醫藥,3,药水,syrup,le sirop,Sirup
+798,服飾健康,醫藥,4,药片,tablet,le comprimé,Tablette
+799,服飾健康,醫藥,5,保險套,condom,le préservatif,Kondom
+800,服飾健康,醫藥,6,药膏,ointment,la pommade,Salbe
+801,服飾健康,醫藥,7,繃帶,bandage,le pansement,der Verband
+802,服飾健康,醫藥,8,体溫计,thermometer,le thermomètre,Thermometer
+803,服飾健康,醫藥,9,口罩,mask,le masque,Maske
+804,服飾健康,醫藥,10,药店,pharmacy,la pharmacie,Apotheke
+805,飲食相關,數量單位,1,数量,quantity,la quantité,Menge
+806,飲食相關,數量單位,2,品質,quality,la qualité,Qualität
+807,飲食相關,數量單位,3,一瓶,a bottle of,une bouteille de,eine Flasche
+808,飲食相關,數量單位,4,一小盒,a box of,une boîte de,eine Schachtel
+809,飲食相關,數量單位,5,一箱,a carton of,un carton de,ein Karton
+810,飲食相關,數量單位,6,一片,a slice of,une tranche de,eine Scheibe
+811,飲食相關,數量單位,7,一塊,a piece of,un morceau de,ein Stück
+812,飲食相關,數量單位,8,一小袋,a small bag of,un sachet de,ein Beutel
+813,飲食相關,數量單位,9,一公斤,a kilo of,un kilo de,ein Kilo
+814,飲食相關,數量單位,10,一公克,a gram of,un gramme de,ein Gramm
+815,飲食相關,數量單位,11,一公升,a liter of,un litre de,ein Liter
+816,飲食相關,數量單位,12,一杯,a glass of,un verre de,ein Glas
+817,飲食相關,數量單位,13,一碗,a bowl of,un bol de,eine Schüssel
+818,飲食相關,數量單位,14,一包,a packet of,un paquet de,eine Packung
+819,飲食相關,數量單位,15,一打,a dozen of,une douzaine de,ein Dutzend
+820,飲食相關,廚具餐具,1,平底鍋,frying pan,la poêle,Pfanne
+821,飲食相關,廚具餐具,2,鍋子,saucepan / pot,la casserole,Topf
+822,飲食相關,廚具餐具,3,餐巾,napkin,la serviette,Serviette
+823,飲食相關,廚具餐具,4,叉子,fork,la fourchette,Gabel
+824,飲食相關,廚具餐具,5,刀子,knife,le couteau,Messer
+825,飲食相關,廚具餐具,6,湯匙,spoon,la cuillère,Löffel
+826,飲食相關,廚具餐具,7,盤子,plate,l’assiette,Teller
+827,飲食相關,廚具餐具,8,玻璃（阳性名词）,glass (n.),le verre,das Glas
+828,飲食相關,廚具餐具,9,碗,bowl,le bol,Schüssel
+829,飲食相關,廚具餐具,10,筷子,chopsticks,les baguettes,Essstäbchen
+830,飲食相關,廚具餐具,11,盘子（阳性名词）,dish (n.),le plat,das Gericht
+831,飲食相關,餐,1,餐,meal,le repas,Mahlzeit
+832,飲食相關,餐,2,早餐,breakfast,le petit-déjeuner,Frühstück
+833,飲食相關,餐,3,吃早饭（动词）,eat breakfast,prendre le petit-déjeuner,frühstücken
+834,飲食相關,餐,4,晚餐（阳性名词）,dinner (n.),le dîner,das Abendessen
+835,飲食相關,餐,5,入口（阴性名词）,"entrance, starter (n.)",l’entrée,die Vorspeise
+836,飲食相關,餐,6,主菜,main course,le plat principal,Hauptgericht
+837,飲食相關,餐,7,餐后点心（阳性名词）,dessert (n.),le dessert,die Nachspeise
+838,飲食相關,餐,8,點心,snack,le goûter,der Snack
+839,飲食相關,餐,9,菜单（阳性名词）,menu (n.),le menu,das Menü
+840,飲食相關,飲料,1,饮料（阴性名词）,drink (n.),la boisson,das Getränk
+841,飲食相關,飲料,2,水,water,l’eau,Wasser
+842,飲食相關,飲料,3,气泡水,sparkling water,l’eau gazeuse,Sprudelwasser
+843,飲食相關,飲料,4,茶（阳性名词）,tea (n.),le thé,der Tee
+844,飲食相關,飲料,5,咖啡（阳性名词）,"coffee, café (n.)",le café,der Kaffee
+845,飲食相關,飲料,6,奶（阳性名词）,milk (n.),le lait,die Milch
+846,飲食相關,飲料,7,熱巧克力,hot chocolate,le chocolat chaud,heiße Schokolade
+847,飲食相關,飲料,8,果汁,juice,le jus,Saft
+848,飲食相關,飲料,9,柠檬水（阴性名词）,lemonade (n.),la limonade,die Limonade
+849,飲食相關,飲料,10,啤酒（阴性名词）,beer (n.),la bière,das Bier
+850,飲食相關,飲料,11,红酒,red wine,le vin rouge,Rotwein
+851,飲食相關,飲料,12,白酒,white wine,le vin blanc,Weißwein
+852,飲食相關,飲料,13,湯,soup,la soupe,Suppe
+853,飲食相關,主食,1,米（阳性名词）,rice (n.),le riz,der Reis
+854,飲食相關,主食,2,面,pasta,les pâtes,die Nudeln
+855,飲食相關,主食,3,面條,noodles,les nouilles,Nudeln
+856,飲食相關,主食,4,面包（阳性名词）,bread (n.),le pain,das Brot
+857,飲食相關,主食,5,棒，棍（阴性名词）,baguette (n.),la baguette,das Baguette
+858,飲食相關,主食,6,土豆（阴性名词）,potato (n.),la pomme de terre,die Kartoffel
+859,飲食相關,主食,7,三明治,sandwich,le sandwich,Sandwich
+860,飲食相關,主食,8,披薩,pizza,la pizza,Pizza
+861,飲食相關,主食,9,可麗餅,crêpe,la crêpe,Crêpe
+862,飲食相關,主食,10,穀物,cereal,les céréales,das Getreide
+863,飲食相關,鹹食,1,食物,food,la nourriture,das Essen
+864,飲食相關,鹹食,2,湯,soup,la soupe,Suppe
+865,飲食相關,鹹食,3,沙拉（阴性名词）,"salad, lettuce (n.)",la salade,der Salat
+866,飲食相關,鹹食,4,牛排,steak,le steak,Steak
+867,飲食相關,鹹食,5,起司,cheese,le fromage,Käse
+868,飲食相關,鹹食,6,火腿（阳性名词）,ham (n.),le jambon,der Schinken
+869,飲食相關,鹹食,7,鸡蛋（阳性名词）,egg (n.),l’œuf,das Ei
+870,飲食相關,甜食,1,爆米花,popcorn,le pop-corn,Popcorn
+871,飲食相關,甜食,2,蛋挞（阴性名词）,tart (n.),la tarte,die Tarte
+872,飲食相關,甜食,3,酸奶（阳性名词）,yoghurt (n.),le yaourt,der Joghurt
+873,飲食相關,甜食,4,蛋糕（阳性名词）,cake (n.),le gâteau,der Kuchen
+874,飲食相關,甜食,5,餅乾,cookie / biscuit,le biscuit,Keks
+875,飲食相關,甜食,6,巧克力（阳性名词）,chocolate (n.),le chocolat,die Schokolade
+876,飲食相關,甜食,7,糖果,candy,le bonbon,das Bonbon
+877,飲食相關,甜食,8,冰（阴性名词）,ice cream (n.),la glace,das Eis
+878,飲食相關,調料香料,1,调味料,spice / seasoning,l’épice,Gewürz
+879,飲食相關,調料香料,2,调味汁（阴性名词）,sauce (n.),la sauce,die Sauce
+880,飲食相關,調料香料,3,鹽,salt,le sel,Salz
+881,飲食相關,調料香料,4,糖,sugar,le sucre,Zucker
+882,飲食相關,調料香料,5,胡椒,pepper,le poivre,Pfeffer
+883,飲食相關,調料香料,6,辣椒,chili pepper,le piment,Chili
+884,飲食相關,調料香料,7,芥末（阴性名词）,mustard (n.),la moutarde,der Senf
+885,飲食相關,調料香料,8,番茄醬,ketchup,le ketchup,Ketchup
+886,飲食相關,調料香料,9,蛋黄酱（阴性名词）,mayonnaise (n.),la mayonnaise,die Mayonnaise
+887,飲食相關,調料香料,10,蜂蜜,honey,le miel,Honig
+888,飲食相關,調料香料,11,醋,vinegar,le vinaigre,Essig
+889,飲食相關,調料香料,12,油,oil,l’huile,Öl
+890,飲食相關,調料香料,13,奶油,butter,le beurre,Butter
+891,飲食相關,調料香料,14,大蒜,garlic,l’ail,Knoblauch
+892,飲食相關,調料香料,15,洋葱（阳性名词）,onion (n.),l’oignon,die Zwiebel
+893,飲食相關,調料香料,16,香草（阴性名词）,vanilla (n.),la vanille,die Vanille
+894,飲食相關,調料香料,17,肉桂,cinnamon,la cannelle,Zimt
+895,飲食相關,調料香料,18,薑,ginger,le gingembre,Ingwer
+896,飲食相關,調料香料,19,羅勒,basil,le basilic,Basilikum
+897,飲食相關,水果,1,水果（阳性名词）,fruit (n.),le fruit,das Obst
+898,飲食相關,水果,2,酪梨,avocado,l’avocat,Avocado
+899,飲食相關,水果,3,桃子,peach,la pêche,Pfirsich
+900,飲食相關,水果,4,無花果,fig,la figue,Feige
+901,飲食相關,水果,5,苹果（阴性名词）,apple (n.),la pomme,der Apfel
+902,飲食相關,水果,6,香蕉,banana,la banane,Banane
+903,飲食相關,水果,7,梨子,pear,la poire,Birne
+904,飲食相關,水果,8,鳳梨,pineapple,l’ananas,Ananas
+905,飲食相關,水果,9,甜瓜,melon,le melon,Melone
+906,飲食相關,水果,10,草莓（阴性名词）,strawberry (n.),la fraise,die Erdbeere
+907,飲食相關,水果,11,葡萄,grape,le raisin,Traube
+908,飲食相關,水果,12,橘子,orange,l’orange,Orange
+909,飲食相關,水果,13,檸檬,lemon,le citron,Zitrone
+910,飲食相關,水果,14,樱桃（阴性名词）,cherry (n.),la cerise,die Kirsche
+911,飲食相關,水果,15,西瓜,watermelon,la pastèque,Wassermelone
+912,飲食相關,水果,16,奇異果,kiwi,le kiwi,Kiwi
+913,飲食相關,水果,17,芒果,mango,la mangue,Mango
+914,飲食相關,水果,18,覆盆子,raspberry,la framboise,Himbeere
+915,飲食相關,水果,19,藍莓,blueberry,la myrtille,Blaubeere
+916,飲食相關,水果,20,椰子,coconut,la noix de coco,Kokosnuss
+917,飲食相關,青菜,1,蔬菜（阳性名词）,vegetable (n.),le légume,das Gemüse
+918,飲食相關,青菜,2,玉米,corn,le maïs,Mais
+919,飲食相關,青菜,3,甜椒,bell pepper,le poivron,Paprika
+920,飲食相關,青菜,4,黃豆,soybean,le soja,Sojabohne
+921,飲食相關,青菜,5,韮蔥,leek,le poireau,Lauch
+922,飲食相關,青菜,6,捲心菜,cabbage,le chou,Kohl
+923,飲食相關,青菜,7,蘑菇（阳性名词）,mushroom (n.),le champignon,der Pilz
+924,飲食相關,青菜,8,茄子,eggplant,l’aubergine,Aubergine
+925,飲食相關,青菜,9,菠菜,spinach,l’épinard,Spinat
+926,飲食相關,青菜,10,洋葱（阳性名词）,onion (n.),l’oignon,die Zwiebel
+927,飲食相關,青菜,11,番茄（阴性名词）,tomato (n.),la tomate,die Tomate
+928,飲食相關,青菜,12,胡蘿蔔,carrot,la carotte,Karotte
+929,飲食相關,青菜,13,黄瓜（阳性名词）,cucumber (n.),le concombre,die Gurke
+930,飲食相關,青菜,14,土豆（阴性名词）,potato (n.),la pomme de terre,die Kartoffel
+931,飲食相關,青菜,15,萵苣,lettuce,la laitue,Kopfsalat
+932,飲食相關,青菜,16,花椰菜,broccoli,le brocoli,Brokkoli
+933,飲食相關,青菜,17,豆子,bean,le haricot,Bohne
+934,飲食相關,青菜,18,蒜头,garlic,l’ail,Knoblauch
+935,飲食相關,青菜,19,南瓜,squash / pumpkin,la courge,Kürbis
+936,飲食相關,動物,1,动物,animal,l’animal,Tier
+937,飲食相關,動物,2,肉类（阴性名词）,meat (n.),la viande,das Fleisch
+938,飲食相關,動物,3,狗（阳性名词）,dog (n.),le chien,der Hund
+939,飲食相關,動物,4,貓,cat,le chat,Katze
+940,飲食相關,動物,5,老鼠/滑鼠,mouse,la souris,Maus
+941,飲食相關,動物,6,豬,pig,le cochon,Schwein
+942,飲食相關,動物,7,猪（阳性名词）,pork (n.),le porc,das Schweinefleisch
+943,飲食相關,動物,8,牛,cow,la vache,Kuh
+944,飲食相關,動物,9,牛，牛肉（阳性名词）,beef (n.),le bœuf,das Rindfleisch
+945,飲食相關,動物,10,羊,sheep,le mouton,Schaf
+946,飲食相關,動物,11,兔子,rabbit,le lapin,Kaninchen
+947,飲食相關,動物,12,马（阳性名词）,horse (n.),le cheval,das Pferd
+948,飲食相關,動物,13,鱼（阳性名词）,fish (n.),le poisson,der Fisch
+949,飲食相關,動物,14,小鸡（阳性名词）,chicken (n.),le poulet,das Huhn
+950,飲食相關,鳥禽,1,鸟,bird,l’oiseau,Vogel
+951,飲食相關,鳥禽,2,鴨,duck,le canard,Ente
+952,飲食相關,鳥禽,3,母雞,hen,la poule,Henne
+953,飲食相關,鳥禽,4,公雞,rooster,le coq,Hahn
+954,飲食相關,鳥禽,5,火雞,turkey,la dinde,Truthahn
+955,飲食相關,鳥禽,6,鵝,goose,l’oie,Gans
+956,飲食相關,海鮮,1,海鲜,seafood,les fruits de mer,Meeresfrüchte
+957,飲食相關,海鮮,2,鱼（阳性名词）,fish (n.),le poisson,der Fisch
+958,飲食相關,海鮮,3,蝦子,shrimp,la crevette,Garnele
+959,飲食相關,海鮮,4,螃蟹,crab,le crabe,Krabbe
+960,飲食相關,海鮮,5,貝類,shellfish,le coquillage,die Muschel
+961,飲食相關,植物,1,花,flower,la fleur,Blume
+962,飲食相關,植物,2,植物（阴性名词）,plant (n.),la plante,die Pflanze
+963,飲食相關,植物,3,樹,tree,l’arbre,Baum
+964,飲食相關,植物,4,叶子（阴性名词）,leaf (n.),la feuille,das Blatt
+965,概念情緒,意見,1,想法（阴性名词）,idea (n.),l’idée,die Idee
+966,概念情緒,意見,2,建议，意见（阳性名词）,advice (n.),le conseil,der Rat
+967,概念情緒,意見,3,建议（阴性名词）,proposal (n.),la proposition,der Vorschlag
+968,概念情緒,意見,4,同意,agreement,l’accord,Einverständnis
+969,概念情緒,信念情緒,1,感情（阴性名词）,emotion (n.),l’émotion,die Emotion
+970,概念情緒,信念情緒,2,悲傷,sadness,la tristesse,Traurigkeit
+971,概念情緒,信念情緒,3,力量,strength,la force,Kraft
+972,概念情緒,信念情緒,4,睡眠,sleep,le sommeil,der Schlaf
+973,概念情緒,信念情緒,5,熱情,passion,la passion,Leidenschaft
+974,概念情緒,信念情緒,6,信心,confidence,la confiance,Vertrauen
+975,概念情緒,生活,1,生活,life,la vie,Leben
+976,概念情緒,生活,2,休息（动词）,rest (v.),se reposer,sich ausruhen
+977,概念情緒,其他,1,個性,personality,le caractère,Charakter
+978,概念情緒,其他,2,真相,truth,la vérité,Wahrheit
+979,概念情緒,其他,3,美貌,beauty,la beauté,Schönheit
+980,概念情緒,其他,4,狀況,situation,la situation,Situation
+981,概念情緒,其他,5,准备（阴性名词）,preparation (n.),la préparation,die Vorbereitung
+982,概念情緒,其他,6,部分（阴性名词）,"party, match (n.)",la partie,der Teil
+983,概念情緒,其他,7,交換,exchange,l’échange,Austausch
+984,概念情緒,其他,8,生產,production,la production,Produktion
+985,概念情緒,其他,9,幫助,help,l’aide,Hilfe
+986,概念情緒,其他,10,选择（阳性名词）,choice (n.),le choix,die Auswahl
+987,概念情緒,其他,11,相遇,meeting / encounter,la rencontre,Begegnung
+988,概念情緒,其他,12,方法（阴性名词）,method (n.),la méthode,die Methode
