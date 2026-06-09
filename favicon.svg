@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Speech bubble -->
+  <rect x="2" y="2" width="28" height="22" rx="7" ry="7" fill="#2563eb"/>
+  <!-- Tail -->
+  <polygon points="8,24 4,30 14,24" fill="#2563eb"/>
+  <!-- Aa text -->
+  <text x="16" y="18" font-family="Georgia, serif" font-size="13" font-weight="700"
+        text-anchor="middle" fill="#ffffff" letter-spacing="-0.5">Aa</text>
+</svg>
