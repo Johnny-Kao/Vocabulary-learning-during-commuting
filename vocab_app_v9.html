@@ -249,10 +249,6 @@
     }
     #tap-speak:active { background:rgba(0,0,0,.07); }
 
-    /* ── Shake button ────────────────────────────────────────────────── */
-    .btn-shake { border:0; background:transparent; padding:5px; font-size:19px; cursor:pointer; opacity:.35; line-height:1; }
-    .btn-shake.enabled { opacity:.85; }
-
     /* ── Report Modal ────────────────────────────────────────────────── */
     .modal-overlay {
       position:fixed; inset:0; z-index:200;
@@ -291,6 +287,25 @@
     .modal-cancel { border:1.5px solid var(--line); border-radius:14px; padding:14px; background:transparent; font-weight:800; font-size:15px; cursor:pointer; color:var(--ink-2); }
     .modal-submit { border:0; border-radius:14px; padding:14px; background:var(--blue); color:#fff; font-weight:800; font-size:15px; cursor:pointer; }
 
+    /* ── Shake first-use prompt ──────────────────────────────────────── */
+    .shake-prompt {
+      position:fixed; bottom:calc(var(--tab-h) + 10px); left:50%;
+      transform:translateX(-50%) translateY(16px);
+      width:min(440px,calc(100% - 32px));
+      background:var(--ink); color:#fff; border-radius:18px;
+      padding:13px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px;
+      z-index:100; opacity:0; pointer-events:none;
+      transition:opacity .25s, transform .25s;
+    }
+    .shake-prompt.show { opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0); }
+    .shake-prompt-text { display:flex; flex-direction:column; gap:2px; }
+    .shake-prompt-text b { font-size:14px; font-weight:800; }
+    .shake-prompt-text span { font-size:12px; color:rgba(255,255,255,.6); line-height:1.4; }
+    .shake-prompt-btns { display:flex; gap:8px; flex-shrink:0; }
+    .shake-prompt-btns button { border:0; border-radius:10px; padding:8px 14px; font-size:13px; font-weight:800; cursor:pointer; }
+    #shakeSkip    { background:rgba(255,255,255,.15); color:#fff; }
+    #shakeAccept  { background:#fff; color:var(--ink); }
+
     /* ── Responsive ──────────────────────────────────────────────────── */
     @media (max-height:700px) {
       .zh     { font-size:20px; }
@@ -324,6 +339,7 @@
 
     (function () {
       const p = new URLSearchParams(location.search);
+      if (p.get('resetShake') === '1') { localStorage.removeItem('shakeReportEnabled'); const u=new URL(location.href); u.searchParams.delete('resetShake'); history.replaceState(null,'',u); }
       const host = location.hostname;
       const lang = (location.pathname.includes('/de') || p.get('lang') === 'de' || host.startsWith('de')) ? 'de' : 'fr';
       fetch('vocab.json')
@@ -343,12 +359,9 @@
               <div class="title">通勤单词</div>
               <div class="subtitle" id="langSubtitle">Français</div>
             </div>
-            <div style="display:flex;align-items:center;gap:8px">
-              <button id="shakeToggleBtn" class="btn-shake" title="启用摇动回报">🫨</button>
-              <div class="lang-switch">
-                <button class="lang-pill" id="frBtn"><span class="flag flag-fr"></span>FR</button>
-                <button class="lang-pill" id="deBtn"><span class="flag flag-de"></span>DE</button>
-              </div>
+            <div class="lang-switch">
+              <button class="lang-pill" id="frBtn"><span class="flag flag-fr"></span>FR</button>
+              <button class="lang-pill" id="deBtn"><span class="flag flag-de"></span>DE</button>
             </div>
           </header>
 
@@ -416,6 +429,7 @@
           </button>
         </nav>
       `;
+      /* SHAKE_REPORT_DISABLED
       if (!document.getElementById('reportModal')) {
         const m = document.createElement('div');
         m.id = 'reportModal'; m.className = 'modal-overlay';
@@ -446,6 +460,21 @@
         </div>`;
         document.body.appendChild(m);
       }
+      if (!document.getElementById('shakePrompt')) {
+        const sp = document.createElement('div');
+        sp.id = 'shakePrompt'; sp.className = 'shake-prompt';
+        sp.innerHTML = `
+          <div class="shake-prompt-text">
+            <b>🫨 启用摇动回报</b>
+            <span>发现错误时快速摇动手机三下即可回报</span>
+          </div>
+          <div class="shake-prompt-btns">
+            <button id="shakeSkip">跳过</button>
+            <button id="shakeAccept">启用</button>
+          </div>`;
+        document.body.appendChild(sp);
+      }
+      SHAKE_REPORT_DISABLED */
 
       setupApp(initLang);
     }
@@ -457,7 +486,7 @@
       ['langSubtitle','frBtn','deBtn','progressLabel','indexLabel','progressBar',
        'categoryLabel','cardCounter','zhText','enText','targetLabel','targetText',
        'speakBtn','knownBtn','prevBtn','nextBtn',
-       'learnPanel','categoryPanel','knownPanel','quizPanel','mainCard','shakeToggleBtn']
+       'learnPanel','categoryPanel','knownPanel','quizPanel','mainCard']
         .forEach(id => els[id] = $(id));
 
       const storageKey = () => `vocab-progress-${state.lang}`;
@@ -574,10 +603,12 @@
         autoPlayThrice();
       }
       function goTo(i) {
+        stopCurrentAudio();
         const prev = state.index;
         state.index = Math.min(Math.max(i,0), VOCAB.length-1);
         saveProgress(); state.tab='learn';
         preloadAudio(VOCAB[state.index]); animateCard(state.index>=prev?1:-1); render();
+        autoPlayThrice();
       }
       function setLang(lang) {
         if (state.lang === lang) return;
@@ -828,6 +859,7 @@
         }
       });
 
+      /* SHAKE_REPORT_DISABLED
       // ── Shake & error report ─────────────────────────────────────────
       function openReportModal() {
         stopCurrentAudio();
@@ -859,7 +891,7 @@
 
       function tryStartShake() {
         let lastShake=0, lastTrigger=0, shakeTimes=[];
-        const THRESHOLD=18, WINDOW=2000, MIN_INTERVAL=180, COOLDOWN=3000;
+        const THRESHOLD=12, WINDOW=2000, MIN_INTERVAL=150, COOLDOWN=4000;
         window.addEventListener('devicemotion', e => {
           const a = e.accelerationIncludingGravity; if (!a) return;
           const force = Math.abs(a.x||0)+Math.abs(a.y||0)+Math.abs(a.z||0);
@@ -874,21 +906,29 @@
         });
       }
       function initShake() {
-        const enabled = localStorage.getItem('shakeReportEnabled') === 'true';
-        if (els.shakeToggleBtn) els.shakeToggleBtn.classList.toggle('enabled', enabled);
-        if (enabled) tryStartShake();
-        if (els.shakeToggleBtn) els.shakeToggleBtn.onclick = async () => {
+        const stored = localStorage.getItem('shakeReportEnabled');
+        if (stored === 'true') { tryStartShake(); return; }
+        if (stored !== null) return;
+        setTimeout(() => document.getElementById('shakePrompt').classList.add('show'), 1800);
+        document.getElementById('shakeAccept').onclick = async () => {
+          document.getElementById('shakePrompt').classList.remove('show');
           if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
             try {
               const perm = await DeviceMotionEvent.requestPermission();
-              if (perm === 'granted') { localStorage.setItem('shakeReportEnabled','true'); els.shakeToggleBtn.classList.add('enabled'); tryStartShake(); }
-            } catch(e) { showToast('无法获取传感器权限'); }
+              localStorage.setItem('shakeReportEnabled', perm === 'granted' ? 'true' : 'false');
+              if (perm === 'granted') tryStartShake();
+            } catch(e) { localStorage.setItem('shakeReportEnabled','false'); }
           } else {
-            localStorage.setItem('shakeReportEnabled','true'); els.shakeToggleBtn.classList.add('enabled'); tryStartShake();
+            localStorage.setItem('shakeReportEnabled','true'); tryStartShake();
           }
+        };
+        document.getElementById('shakeSkip').onclick = () => {
+          document.getElementById('shakePrompt').classList.remove('show');
+          localStorage.setItem('shakeReportEnabled','false');
         };
       }
       initShake();
+      SHAKE_REPORT_DISABLED */
 
       loadProgress();
       preloadAudio(VOCAB[state.index]);
