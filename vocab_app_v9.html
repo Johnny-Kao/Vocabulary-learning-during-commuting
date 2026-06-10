@@ -239,6 +239,58 @@
       100% { transform:translateY(110vh) rotate(720deg); opacity:0; }
     }
 
+    /* ── Center tap-speak circle ─────────────────────────────────────── */
+    #target-zone { position:relative; }
+    #tap-speak {
+      position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+      width:80px; height:80px; border-radius:50%;
+      background:transparent; z-index:2;
+      transition:background .1s;
+    }
+    #tap-speak:active { background:rgba(0,0,0,.07); }
+
+    /* ── Shake button ────────────────────────────────────────────────── */
+    .btn-shake { border:0; background:transparent; padding:5px; font-size:19px; cursor:pointer; opacity:.35; line-height:1; }
+    .btn-shake.enabled { opacity:.85; }
+
+    /* ── Report Modal ────────────────────────────────────────────────── */
+    .modal-overlay {
+      position:fixed; inset:0; z-index:200;
+      background:rgba(0,0,0,.45); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+      display:flex; align-items:flex-end; justify-content:center;
+      opacity:0; pointer-events:none; transition:opacity .2s;
+    }
+    .modal-overlay.open { opacity:1; pointer-events:auto; }
+    .modal-box {
+      background:#fff; border-radius:24px 24px 0 0; width:min(480px,100%);
+      padding:24px 20px calc(24px + env(safe-area-inset-bottom));
+      transform:translateY(30px); transition:transform .25s cubic-bezier(.25,.46,.45,.94);
+      max-height:90dvh; overflow-y:auto;
+    }
+    .modal-overlay.open .modal-box { transform:translateY(0); }
+    .modal-title { font-size:18px; font-weight:900; }
+    .modal-snapshot {
+      background:#f4f4f5; border-radius:12px; padding:11px 14px;
+      margin:14px 0 16px; font-size:13px; line-height:1.75; color:var(--ink-2);
+    }
+    .modal-snapshot b { color:var(--ink); font-size:14px; }
+    .modal-label { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); margin-bottom:5px; display:block; }
+    .modal-select {
+      width:100%; border:1.5px solid var(--line); border-radius:12px;
+      padding:11px 14px; font-size:15px; font-weight:600; color:var(--ink);
+      background:#fff; outline:none; appearance:none; -webkit-appearance:none; margin-bottom:14px;
+    }
+    .modal-select:focus { border-color:var(--blue); }
+    .modal-textarea {
+      width:100%; border:1.5px solid var(--line); border-radius:12px;
+      padding:11px 14px; font-size:15px; color:var(--ink); font-family:inherit;
+      resize:none; outline:none; min-height:72px; margin-bottom:18px; display:block;
+    }
+    .modal-textarea:focus { border-color:var(--blue); }
+    .modal-actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .modal-cancel { border:1.5px solid var(--line); border-radius:14px; padding:14px; background:transparent; font-weight:800; font-size:15px; cursor:pointer; color:var(--ink-2); }
+    .modal-submit { border:0; border-radius:14px; padding:14px; background:var(--blue); color:#fff; font-weight:800; font-size:15px; cursor:pointer; }
+
     /* ── Responsive ──────────────────────────────────────────────────── */
     @media (max-height:700px) {
       .zh     { font-size:20px; }
@@ -291,9 +343,12 @@
               <div class="title">通勤单词</div>
               <div class="subtitle" id="langSubtitle">Français</div>
             </div>
-            <div class="lang-switch">
-              <button class="lang-pill" id="frBtn"><span class="flag flag-fr"></span>FR</button>
-              <button class="lang-pill" id="deBtn"><span class="flag flag-de"></span>DE</button>
+            <div style="display:flex;align-items:center;gap:8px">
+              <button id="shakeToggleBtn" class="btn-shake" title="启用摇动回报">🫨</button>
+              <div class="lang-switch">
+                <button class="lang-pill" id="frBtn"><span class="flag flag-fr"></span>FR</button>
+                <button class="lang-pill" id="deBtn"><span class="flag flag-de"></span>DE</button>
+              </div>
             </div>
           </header>
 
@@ -322,15 +377,16 @@
                     <div class="en" id="enText"></div>
                   </div>
                 </div>
-                <div class="fields-target">
+                <div class="fields-target" id="target-zone">
                   <div class="label" id="targetLabel">Français</div>
                   <div class="target" id="targetText"></div>
+                  <div id="tap-speak"></div>
                 </div>
               </div>
               <div class="card-footer">
                 <div class="actions">
-                  <button class="btn-speak" id="speakBtn">🔊 播放发音</button>
                   <button class="btn-known" id="knownBtn">标记掌握</button>
+                  <button class="btn-speak" id="speakBtn">🔊 播放发音</button>
                 </div>
                 <div class="nav-row">
                   <button class="btn-nav" id="prevBtn">← 上一词</button>
@@ -360,6 +416,37 @@
           </button>
         </nav>
       `;
+      if (!document.getElementById('reportModal')) {
+        const m = document.createElement('div');
+        m.id = 'reportModal'; m.className = 'modal-overlay';
+        m.innerHTML = `<div class="modal-box">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div class="modal-title">回报单词错误</div>
+            <button id="reportClose" style="border:0;background:transparent;font-size:20px;cursor:pointer;color:var(--muted);padding:4px">✕</button>
+          </div>
+          <div class="modal-snapshot" id="reportSnapshot"></div>
+          <label class="modal-label">错误类型</label>
+          <select class="modal-select" id="reportType">
+            <option value="">请选择…</option>
+            <option value="meaning_error">意思错误</option>
+            <option value="translation_error">翻译不自然</option>
+            <option value="french_error">法文错误</option>
+            <option value="german_error">德文错误</option>
+            <option value="article_error">冠词错误</option>
+            <option value="tts_error">发音 / TTS 问题</option>
+            <option value="format_error">格式问题</option>
+            <option value="other">其他</option>
+          </select>
+          <label class="modal-label">补充意见（选填）</label>
+          <textarea class="modal-textarea" id="reportComment" placeholder="描述问题…"></textarea>
+          <div class="modal-actions">
+            <button class="modal-cancel" id="reportCancel">取消</button>
+            <button class="modal-submit" id="reportSubmit">送出</button>
+          </div>
+        </div>`;
+        document.body.appendChild(m);
+      }
+
       setupApp(initLang);
     }
 
@@ -370,7 +457,7 @@
       ['langSubtitle','frBtn','deBtn','progressLabel','indexLabel','progressBar',
        'categoryLabel','cardCounter','zhText','enText','targetLabel','targetText',
        'speakBtn','knownBtn','prevBtn','nextBtn',
-       'learnPanel','categoryPanel','knownPanel','quizPanel','mainCard']
+       'learnPanel','categoryPanel','knownPanel','quizPanel','mainCard','shakeToggleBtn']
         .forEach(id => els[id] = $(id));
 
       const storageKey = () => `vocab-progress-${state.lang}`;
@@ -427,6 +514,34 @@
         if (audio.src.split('/').pop() !== path.split('/').pop()) { audio.src=path; audio.load(); }
       }
 
+      // ── Audio cancellation & auto-play ───────────────────────────────
+      let playToken = 0;
+      function stopCurrentAudio() {
+        playToken++;
+        const audio = $('card-audio');
+        audio.pause(); audio.currentTime = 0; audio.onended = null;
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      }
+      function autoPlayThrice() {
+        const token = ++playToken;
+        const it = item();
+        let count = 0;
+        const audio = $('card-audio');
+        function playNext() {
+          if (token !== playToken || count >= 3) return;
+          count++;
+          const path = it.audio && it.audio[state.lang];
+          if (path) {
+            audio.src = path; audio.currentTime = 0;
+            audio.onended = () => { if (token === playToken) setTimeout(playNext, 900); };
+            audio.play().catch(() => { speakTTS(it[state.lang]); setTimeout(playNext, 2000); });
+          } else {
+            speakTTS(it[state.lang]); setTimeout(playNext, 2000);
+          }
+        }
+        playNext();
+      }
+
       // Confetti
       function launchConfetti() {
         const overlay = document.createElement('div');
@@ -453,8 +568,10 @@
 
       // Navigation
       function go(delta) {
+        stopCurrentAudio();
         state.index = (state.index + delta + VOCAB.length) % VOCAB.length;
         saveProgress(); preloadAudio(VOCAB[state.index]); animateCard(delta); renderLearn();
+        autoPlayThrice();
       }
       function goTo(i) {
         const prev = state.index;
@@ -697,6 +814,81 @@
         sx=sy=null;
         if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.4) go(dx<0?1:-1);
       },{passive:true});
+
+      // Target-zone: center circle = play once, left/right = navigate
+      document.getElementById('target-zone').addEventListener('click', e => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = e.clientX - cx, dy = e.clientY - cy;
+        if (dx*dx + dy*dy <= 40*40) {
+          stopCurrentAudio(); speak(target());
+        } else {
+          e.clientX < cx ? go(-1) : go(1);
+        }
+      });
+
+      // ── Shake & error report ─────────────────────────────────────────
+      function openReportModal() {
+        stopCurrentAudio();
+        const it = item();
+        document.getElementById('reportSnapshot').innerHTML =
+          `<b>${it.zh_cn}</b> · ${it.en}` +
+          (it.fr ? `<br>FR: ${it.fr}` : '') +
+          (it.de ? `<br>DE: ${it.de}` : '');
+        document.getElementById('reportType').value = '';
+        document.getElementById('reportComment').value = '';
+        document.getElementById('reportModal').classList.add('open');
+      }
+      function closeReportModal() {
+        document.getElementById('reportModal').classList.remove('open');
+      }
+      document.getElementById('reportClose').onclick  = closeReportModal;
+      document.getElementById('reportCancel').onclick = closeReportModal;
+      document.getElementById('reportSubmit').onclick = () => {
+        const it = item();
+        const payload = {
+          reportType: document.getElementById('reportType').value || 'other',
+          comment: document.getElementById('reportComment').value.trim() || undefined,
+          wordSnapshot: { id:it.id, zh:it.zh_cn, en:it.en, fr:it.fr, de:it.de },
+          learningContext: { currentIndex:state.index, source:'shake_report', timestamp:new Date().toISOString(), userAgent:navigator.userAgent }
+        };
+        closeReportModal();
+        fetch('/api/report-error', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) }).catch(()=>{});
+      };
+
+      function tryStartShake() {
+        let lastShake=0, lastTrigger=0, shakeTimes=[];
+        const THRESHOLD=18, WINDOW=2000, MIN_INTERVAL=180, COOLDOWN=3000;
+        window.addEventListener('devicemotion', e => {
+          const a = e.accelerationIncludingGravity; if (!a) return;
+          const force = Math.abs(a.x||0)+Math.abs(a.y||0)+Math.abs(a.z||0);
+          const now = Date.now();
+          if (force < THRESHOLD || now-lastShake < MIN_INTERVAL) return;
+          lastShake = now;
+          shakeTimes.push(now);
+          shakeTimes = shakeTimes.filter(t => now-t < WINDOW);
+          if (shakeTimes.length >= 3 && now-lastTrigger > COOLDOWN && !document.getElementById('reportModal').classList.contains('open')) {
+            shakeTimes=[]; lastTrigger=now; openReportModal();
+          }
+        });
+      }
+      function initShake() {
+        const enabled = localStorage.getItem('shakeReportEnabled') === 'true';
+        if (els.shakeToggleBtn) els.shakeToggleBtn.classList.toggle('enabled', enabled);
+        if (enabled) tryStartShake();
+        if (els.shakeToggleBtn) els.shakeToggleBtn.onclick = async () => {
+          if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+            try {
+              const perm = await DeviceMotionEvent.requestPermission();
+              if (perm === 'granted') { localStorage.setItem('shakeReportEnabled','true'); els.shakeToggleBtn.classList.add('enabled'); tryStartShake(); }
+            } catch(e) { showToast('无法获取传感器权限'); }
+          } else {
+            localStorage.setItem('shakeReportEnabled','true'); els.shakeToggleBtn.classList.add('enabled'); tryStartShake();
+          }
+        };
+      }
+      initShake();
 
       loadProgress();
       preloadAudio(VOCAB[state.index]);
