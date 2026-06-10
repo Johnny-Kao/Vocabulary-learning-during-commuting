@@ -13,6 +13,7 @@ A mobile-first, offline-capable flashcard app for learning French and German voc
 - Native TTS audio (macOS `say` → MP3) for French and German
 - Progress saved per language in `localStorage`
 - Quiz mode with confetti on correct answers
+- Cat paw click effect on every tap (canvas-based, real PNG assets)
 - Works on iPhone Safari (audio via persistent DOM `<audio>` element)
 - Switching between `fr-voc.johnnykao.com` and `de-voc.johnnykao.com` auto-selects the language
 
@@ -84,9 +85,10 @@ Open `http://localhost:8765/vocab_app_v9.html?lang=fr` or `?lang=de`.
 ├── index.html                  # Entry point → redirects to vocab_app_v9.html
 ├── vocab.json                  # Generated vocabulary data (988 entries)
 ├── assets/
-│   └── audio/
-│       ├── fr/                 # French MP3s (A1-0001.mp3 … A1-0988.mp3)
-│       └── de/                 # German MP3s
+│   ├── audio/
+│   │   ├── fr/                 # French MP3s (A1-0001.mp3 … A1-0988.mp3)
+│   │   └── de/                 # German MP3s
+│   └── catpaws/                # Cat paw PNG assets (from react-cat-paws)
 ├── scripts/
 │   ├── generate_vocab_json.py  # CSV → vocab.json
 │   └── generate_vocab_audio.py # vocab.json → TTS MP3s
@@ -98,6 +100,13 @@ Open `http://localhost:8765/vocab_app_v9.html?lang=fr` or `?lang=de`.
 ## Tech
 
 - Pure HTML / CSS / JS — no framework, no build step
+- [Motion](https://motion.dev) for card slide and tab transition animations
 - macOS `say` + `ffmpeg` for TTS audio generation
 - Deployed on Cloudflare Pages
 - Custom domains auto-select language via subdomain detection (`fr-*` → French, `de-*` → German)
+
+---
+
+## Credits
+
+- Cat paw click effect — PNG assets from [react-cat-paws](https://github.com/DrHaid/react-cat-paws) by DrHaid, re-implemented in vanilla canvas JS
