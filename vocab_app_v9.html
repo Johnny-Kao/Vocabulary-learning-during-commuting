@@ -7,6 +7,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <title>通勤单词</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <script src="https://cdn.jsdelivr.net/npm/motion@10.18.0/dist/motion.umd.js"></script>
   <style>
     :root {
       --bg:      #f2f2ef;
@@ -86,8 +87,8 @@
     .card-fields { flex:1; display:flex; flex-direction:column; gap:10px; min-height:0; }
 
     /* Reference row — no box, just two-column text */
-    .fields-ref { display:grid; grid-template-columns:1fr 1fr; gap:12px; flex:0 0 auto; }
-    .ref-item { display:flex; flex-direction:column; gap:3px; }
+    .fields-ref { display:grid; grid-template-columns:1fr 1fr; gap:12px; flex:0 0 auto; overflow:hidden; }
+    .ref-item { display:flex; flex-direction:column; gap:4px; overflow:hidden; }
 
     /* Target area — language-tinted panel, label pinned top-left, word centered */
     .fields-target {
@@ -100,22 +101,24 @@
     #targetLabel { position:absolute; top:14px; left:18px; }
 
     .label { font-size:10px; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); font-weight:800; }
-    .zh     { font-size:24px; line-height:1.2; letter-spacing:-.03em; font-weight:900; }
-    .en     { font-size:14px; line-height:1.3; letter-spacing:-.01em; font-weight:600; color:var(--ink-2); }
-    .target { font-size:44px; line-height:1.1; letter-spacing:-.04em; font-weight:950; text-align:center; }
+    .zh     { font-size:28px; line-height:1.2; letter-spacing:-.03em; font-weight:900;
+              display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    .en     { font-size:15px; line-height:1.3; letter-spacing:-.01em; font-weight:600; color:var(--ink-2);
+              white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .target { font-size:52px; line-height:1.1; letter-spacing:-.04em; font-weight:950; text-align:center; }
 
     /* ── Card footer ─────────────────────────────────────────────────── */
     .card-footer { flex:0 0 auto; margin-top:12px; display:flex; flex-direction:column; gap:8px; }
     .actions { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
 
     .btn-speak {
-      border:0; border-radius:16px; padding:14px 12px;
+      border:2px solid var(--line); border-radius:16px; padding:14px 12px;
       font-weight:800; font-size:15px; min-height:52px;
-      background:var(--blue); color:#fff;
+      background:transparent; color:var(--ink-2);
       cursor:pointer; letter-spacing:-.01em;
-      transition:transform .1s, opacity .1s;
+      transition:background .15s, border-color .15s, color .15s, transform .1s;
     }
-    .btn-speak:active { transform:scale(.97); opacity:.9; }
+    .btn-speak:active { transform:scale(.97); opacity:.8; }
 
     .btn-known {
       border:2px solid var(--line); border-radius:16px; padding:14px 12px;
@@ -127,7 +130,7 @@
     .btn-known.bump { animation:bump .2s ease; }
     @keyframes bump { 0%,100%{transform:scale(1)} 50%{transform:scale(.96)} }
 
-    .nav-row { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+    .nav-row { display:none; }
     .btn-nav {
       border:1.5px solid var(--line); border-radius:13px; padding:10px;
       min-height:42px; background:transparent; color:var(--ink-2);
@@ -136,11 +139,13 @@
     }
     .btn-nav:active { background:#f4f4f5; border-color:#d1d5db; }
 
-    /* ── Card animation ──────────────────────────────────────────────── */
-    @keyframes slide-in-r { from{transform:translateX(20px);opacity:.5} to{transform:translateX(0);opacity:1} }
-    @keyframes slide-in-l { from{transform:translateX(-20px);opacity:.5} to{transform:translateX(0);opacity:1} }
-    .card.anim-right { animation:slide-in-r .2s cubic-bezier(.25,.46,.45,.94) both; }
-    .card.anim-left  { animation:slide-in-l .2s cubic-bezier(.25,.46,.45,.94) both; }
+    /* ── Card animation — handled by Motion JS ──────────────────────── */
+    /* CSS fallback (used if Motion fails to load)
+    @keyframes slide-in-r { from{transform:translateX(48px) scale(.97);opacity:0} to{transform:translateX(0) scale(1);opacity:1} }
+    @keyframes slide-in-l { from{transform:translateX(-48px) scale(.97);opacity:0} to{transform:translateX(0) scale(1);opacity:1} }
+    .card.anim-right { animation:slide-in-r .24s cubic-bezier(.25,.46,.45,.94) both; }
+    .card.anim-left  { animation:slide-in-l .24s cubic-bezier(.25,.46,.45,.94) both; }
+    */
 
     /* ── Scrollable panels ───────────────────────────────────────────── */
     #categoryPanel,#knownPanel,#quizPanel {
@@ -308,13 +313,12 @@
 
     /* ── Responsive ──────────────────────────────────────────────────── */
     @media (max-height:700px) {
-      .zh     { font-size:20px; }
-      .en     { font-size:13px; }
-      .target { font-size:36px; }
-      .fields-target { padding:12px 16px; border-radius:14px; }
+      .zh     { font-size:24px; }
+      .en     { font-size:14px; }
+      .target { font-size:42px; }
+      .fields-target { padding:12px 16px; border-radius:14px; flex-basis:50%; }
       #targetLabel { top:11px; left:14px; }
       .btn-speak, .btn-known { min-height:48px; padding:12px; font-size:14px; }
-      .btn-nav { min-height:38px; font-size:13px; }
     }
     @media (max-width:360px) {
       header,#learnPanel { padding-left:14px; padding-right:14px; }
@@ -382,7 +386,7 @@
               <div class="card-fields">
                 <div class="fields-ref">
                   <div class="ref-item">
-                    <div class="label">中文</div>
+                    <div class="label">Chinese</div>
                     <div class="zh" id="zhText"></div>
                   </div>
                   <div class="ref-item">
@@ -398,7 +402,7 @@
               </div>
               <div class="card-footer">
                 <div class="actions">
-                  <button class="btn-known" id="knownBtn">标记掌握</button>
+                  <button class="btn-known" id="knownBtn">⭐ 标记掌握</button>
                   <button class="btn-speak" id="speakBtn">🔊 播放发音</button>
                 </div>
                 <div class="nav-row">
@@ -588,11 +592,19 @@
         setTimeout(() => overlay.remove(), 1600);
       }
 
-      // Card animation
+      // Card animation — Motion spring
       function animateCard(dir) {
-        els.mainCard.classList.remove('anim-right','anim-left');
-        void els.mainCard.offsetWidth;
-        els.mainCard.classList.add(dir>0 ? 'anim-right' : 'anim-left');
+        if (window.Motion) {
+          window.Motion.animate(
+            els.mainCard,
+            { x: [dir > 0 ? 64 : -64, 0], opacity: [0, 1], scale: [0.94, 1] },
+            { type: 'spring', stiffness: 280, damping: 24, mass: 0.85 }
+          );
+        } else {
+          els.mainCard.classList.remove('anim-right','anim-left');
+          void els.mainCard.offsetWidth;
+          els.mainCard.classList.add(dir > 0 ? 'anim-right' : 'anim-left');
+        }
       }
 
       // Navigation
@@ -636,7 +648,7 @@
         els.enText.textContent     = it.en;
         els.targetLabel.textContent = langLabel().toUpperCase();
         els.targetText.textContent  = target();
-        els.knownBtn.textContent = known ? '✓ 已掌握' : '标记掌握';
+        els.knownBtn.textContent = known ? '✓ 已掌握' : '⭐ 标记掌握';
         els.knownBtn.classList.toggle('on', known);
       }
 
@@ -834,7 +846,18 @@
         }
         saveProgress(); renderLearn(); renderCategory(); renderKnown(); renderTabs();
       };
-      document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{ state.tab=b.dataset.tab; render(); });
+      document.querySelectorAll('.tab').forEach(b => b.onclick = () => {
+        const prev = state.tab;
+        state.tab = b.dataset.tab;
+        render();
+        if (window.Motion && prev !== state.tab) {
+          window.Motion.animate(
+            $(state.tab + 'Panel'),
+            { opacity: [0, 1], y: [12, 0] },
+            { type: 'spring', stiffness: 380, damping: 30 }
+          );
+        }
+      });
 
       // Swipe
       let sx=null, sy=null;
