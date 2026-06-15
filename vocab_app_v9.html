@@ -761,7 +761,7 @@
           }
         }
 
-        let lastTime = null;
+        let lastTime = null, rafId = null;
         function tick(time) {
           const delta = lastTime ? time - lastTime : 0;
           lastTime = time;
@@ -786,11 +786,18 @@
             else activePaws[i].draw();
           }
 
-          requestAnimationFrame(tick);
+          if (activePaws.length > 0 || prints.length > 0) {
+            rafId = requestAnimationFrame(tick);
+          } else {
+            rafId = null;
+            lastTime = null;
+          }
         }
-        requestAnimationFrame(tick);
 
-        const onTap = (x, y) => activePaws.push(new CatPaw(x, y));
+        const onTap = (x, y) => {
+          activePaws.push(new CatPaw(x, y));
+          if (!rafId) rafId = requestAnimationFrame(tick);
+        };
         if ('ontouchstart' in window) {
           document.addEventListener('touchstart', e => onTap(e.touches[0].clientX, e.touches[0].clientY), { passive:true });
         } else {
