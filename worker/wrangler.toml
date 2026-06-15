@@ -1,0 +1,7 @@
+name = "vocab-sync"
+main = "src/index.js"
+compatibility_date = "2025-06-15"
+
+[[kv_namespaces]]
+binding = "PROGRESS_KV"
+id = "5340122d6d5c4850a6f590cb97ccb31f"

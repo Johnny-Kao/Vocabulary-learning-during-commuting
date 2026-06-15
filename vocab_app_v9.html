@@ -43,7 +43,8 @@
       padding:18px 20px 6px; gap:12px;
     }
     .title-block .title  { font-size:26px; font-weight:900; letter-spacing:-.04em; line-height:1; }
-    .title-block .subtitle { font-size:13px; color:var(--muted); margin-top:4px; font-weight:500; }
+    .title-block .subtitle { font-size:13px; color:var(--muted); margin-top:4px; font-weight:500; cursor:pointer; }
+    .title-block .subtitle:active { opacity:.6; }
 
     /* Segmented control — iOS-style */
     .lang-switch { display:flex; gap:2px; padding:3px; background:#e2e2e6; border-radius:999px; margin-top:2px; }
@@ -258,7 +259,7 @@
       transform:translateX(-50%) translateY(14px); opacity:0;
       background:var(--ink); color:#fff; padding:10px 18px;
       border-radius:999px; font-weight:700; font-size:14px;
-      transition:all .18s ease; z-index:50; pointer-events:none; white-space:nowrap;
+      transition:all .18s ease; z-index:500; pointer-events:none; white-space:nowrap;
     }
     .toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
 
@@ -338,6 +339,32 @@
     #shakeSkip    { background:rgba(255,255,255,.15); color:#fff; }
     #shakeAccept  { background:#fff; color:var(--ink); }
 
+    /* ── Skip Known button ───────────────────────────────────────────── */
+    .skip-known-btn {
+      border:0; border-radius:999px; padding:6px 10px;
+      font-size:16px; line-height:1; cursor:pointer; flex:0 0 auto;
+      background:#e2e2e6; color:var(--muted);
+      transition:background .18s, color .18s, box-shadow .18s;
+    }
+    .skip-known-btn.active { background:#fff; color:var(--ink); box-shadow:0 1px 5px rgba(0,0,0,.16); }
+
+    /* ── Quiz category selector ───────────────────────────────────────── */
+    .quiz-cat-row {
+      display:flex; align-items:center; gap:10px; padding:12px 4px;
+      border-bottom:1px solid #f4f4f5; cursor:pointer; transition:opacity .1s;
+    }
+    .quiz-cat-row:last-child { border-bottom:0; }
+    .quiz-cat-row:active { opacity:.65; }
+    .quiz-cat-name { flex:1; font-size:14px; font-weight:700; }
+    .quiz-cat-stat { font-size:12px; color:var(--muted); font-weight:600; white-space:nowrap; }
+    .quiz-cat-cb {
+      width:22px; height:22px; border-radius:6px; border:1.5px solid var(--line);
+      display:flex; align-items:center; justify-content:center;
+      font-size:12px; font-weight:900; flex:0 0 22px; color:transparent;
+      transition:background .12s, border-color .12s, color .12s;
+    }
+    .quiz-cat-row.checked .quiz-cat-cb { background:var(--ok); border-color:var(--ok); color:#fff; }
+
     /* ── Responsive ──────────────────────────────────────────────────── */
     @media (max-height:700px) {
       .zh     { font-size:23px; }
@@ -369,6 +396,7 @@
 
   <script>
     let VOCAB = [];
+    const SYNC_URL = 'https://vocab-sync.at12885.workers.dev';
 
     (function () {
       const p = new URLSearchParams(location.search);
@@ -392,9 +420,12 @@
               <div class="title">通勤单词</div>
               <div class="subtitle" id="langSubtitle">Français</div>
             </div>
-            <div class="lang-switch">
-              <button class="lang-pill" id="frBtn"><span class="flag flag-fr"></span>FR</button>
-              <button class="lang-pill" id="deBtn"><span class="flag flag-de"></span>DE</button>
+            <div style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+              <button class="skip-known-btn active" id="skipKnownBtn" title="跳过已掌握">⏭️</button>
+              <div class="lang-switch">
+                <button class="lang-pill" id="frBtn"><span class="flag flag-fr"></span>FR</button>
+                <button class="lang-pill" id="deBtn"><span class="flag flag-de"></span>DE</button>
+              </div>
             </div>
           </header>
 
@@ -509,14 +540,42 @@
       }
       SHAKE_REPORT_DISABLED */
 
+      if (!document.getElementById('syncModal')) {
+        const m = document.createElement('div');
+        m.id = 'syncModal'; m.className = 'modal-overlay';
+        m.innerHTML = `<div class="modal-box">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+            <div class="modal-title">同步进度</div>
+            <button id="syncClose" style="border:0;background:transparent;font-size:20px;cursor:pointer;color:var(--muted);padding:4px">✕</button>
+          </div>
+          <div id="syncLoginView">
+            <p style="font-size:14px;color:var(--muted);margin-bottom:16px;line-height:1.5">输入密码，将学习进度同步到云端。</p>
+            <label class="modal-label">密码</label>
+            <input id="syncPwInput" type="password" class="modal-textarea" placeholder="输入密码…" style="min-height:0;padding:11px 14px;margin-bottom:18px" autocomplete="current-password" />
+            <div class="modal-actions">
+              <button class="modal-cancel" id="syncCancelBtn">取消</button>
+              <button class="modal-submit" id="syncLoginBtn">登录并同步</button>
+            </div>
+          </div>
+          <div id="syncLoggedView" style="display:none">
+            <div class="modal-snapshot">已登录为 <b id="syncUserLabel"></b><br><span id="syncStatusText" style="font-size:12px"></span></div>
+            <div class="modal-actions">
+              <button class="modal-cancel" id="syncLogoutBtn">退出登录</button>
+              <button class="modal-submit" id="syncNowBtn">立即同步</button>
+            </div>
+          </div>
+        </div>`;
+        document.body.appendChild(m);
+      }
+
       setupApp(initLang);
     }
 
     function setupApp(initLang) {
-      const state = { lang:initLang, index:0, known:new Set(), tab:'learn', quiz:null };
+      const state = { lang:initLang, index:0, known:new Set(), tab:'learn', quiz:null, skipKnown:localStorage.getItem('vocab-skip-known')!=='false', quizCategories:null, sync:{user:null,pw:null} };
       const $ = id => document.getElementById(id);
       const els = {};
-      ['langSubtitle','frBtn','deBtn','progressLabel','indexLabel','progressBar',
+      ['langSubtitle','frBtn','deBtn','skipKnownBtn','progressLabel','indexLabel','progressBar',
        'categoryLabel','cardCounter','zhText','enText','targetLabel','targetText',
        'speakBtn','knownBtn','prevBtn','nextBtn',
        'learnPanel','categoryPanel','knownPanel','quizPanel','mainCard']
@@ -595,7 +654,7 @@
           const path = it.audio && it.audio[state.lang];
           if (path) {
             audio.src = path; audio.currentTime = 0;
-            audio.onended = () => { if (token === playToken) setTimeout(playNext, 900); };
+            audio.onended = () => { if (token === playToken) setTimeout(playNext, 600); };
             audio.play().catch(() => { speakTTS(it[state.lang]); setTimeout(playNext, 2000); });
           } else {
             speakTTS(it[state.lang]); setTimeout(playNext, 2000);
@@ -757,7 +816,15 @@
       // Navigation
       function go(delta) {
         stopCurrentAudio();
-        state.index = (state.index + delta + VOCAB.length) % VOCAB.length;
+        let next = (state.index + delta + VOCAB.length) % VOCAB.length;
+        if (state.skipKnown && state.known.size > 0 && state.known.size < VOCAB.length) {
+          let steps = 0;
+          while (state.known.has(VOCAB[next].id) && steps < VOCAB.length) {
+            next = (next + delta + VOCAB.length) % VOCAB.length;
+            steps++;
+          }
+        }
+        state.index = next;
         saveProgress(); preloadAudio(VOCAB[state.index]); animateCard(delta); renderLearn();
         autoPlayThrice();
       }
@@ -783,7 +850,7 @@
         const it = item();
         const known = state.known.has(it.id);
         document.body.setAttribute('data-lang', state.lang);
-        els.langSubtitle.textContent  = langLabel();
+        els.langSubtitle.innerHTML = langLabel() + (state.sync.user ? ' <span style="color:var(--ok);font-size:9px">●</span>' : '');
         els.frBtn.classList.toggle('active', state.lang==='fr');
         els.deBtn.classList.toggle('active', state.lang==='de');
         const emoji = it.categoryEmoji || '';
@@ -906,8 +973,9 @@
         return shuffle(unique.slice(0,4));
       }
       function startQuiz() {
-        const pool = VOCAB.filter(v=>state.known.has(v.id));
-        if(pool.length<4){ showToast('至少掌握 4 个单词后可测验'); return; }
+        const cats = state.quizCategories || new Set(VOCAB.map(v=>v.category));
+        const pool = VOCAB.filter(v=>state.known.has(v.id)&&cats.has(v.category));
+        if(pool.length<4){ showToast('所选分类至少需要 4 个已掌握单词'); return; }
         const items = shuffle(pool).slice(0,Math.min(10,pool.length));
         state.quiz = { items, options:quizOptions(items[0]), q:0, locked:false, selected:null, score:0 };
         renderQuiz();
@@ -931,7 +999,7 @@
             <p class="muted" style="font-size:14px;margin:8px 0 4px">${msg}</p>
             <button class="small-btn" id="restartQuizBtn">再来一局</button>
           </div>`;
-          $('restartQuizBtn').onclick=startQuiz; return;
+          $('restartQuizBtn').onclick=()=>{state.quiz=null;renderQuiz();}; return;
         }
         state.quiz.q++; state.quiz.locked=false; state.quiz.selected=null;
         state.quiz.options=quizOptions(state.quiz.items[state.quiz.q]);
@@ -939,18 +1007,80 @@
       }
       function renderQuiz() {
         if(!state.quiz){
-          const count=state.known.size;
-          const canStart=count>=4;
-          els.quizPanel.innerHTML=`<div class="quiz-card">
-            <div style="font-size:36px;margin-bottom:12px">🎯</div>
-            <h2 style="font-size:20px;font-weight:900;margin-bottom:8px">随机测验</h2>
-            <p class="muted" style="font-size:14px;margin-bottom:18px;line-height:1.5">从已掌握的单词中随机出题<br>答对会有惊喜 ✨</p>
-            <div style="font-size:28px;font-weight:950;margin-bottom:16px">${count}<span style="font-size:15px;font-weight:600;color:var(--muted)"> 个可用单词</span></div>
-            <button class="small-btn" id="startQuizBtn" style="${canStart?'':'opacity:.4;pointer-events:none'}">
-              ${canStart?'开始测验':`还差 ${4-count} 个才能开始`}
-            </button>
-          </div>`;
-          if(canStart) $('startQuizBtn').onclick=startQuiz; return;
+          // Build category data grouped by section
+          const sectData=new Map();
+          VOCAB.forEach(v=>{
+            if(!sectData.has(v.section)) sectData.set(v.section,new Map());
+            const cm=sectData.get(v.section);
+            if(!cm.has(v.category)) cm.set(v.category,{emoji:v.categoryEmoji||'',total:0,known:0});
+            const c=cm.get(v.category); c.total++;
+            if(state.known.has(v.id)) c.known++;
+          });
+          const allCatData=new Map();
+          sectData.forEach((cm,sec)=>cm.forEach((info,cat)=>allCatData.set(cat,{...info,sec})));
+          const hasKnown=[...allCatData.values()].some(c=>c.known>0);
+          if(!hasKnown){
+            els.quizPanel.innerHTML=`<div class="quiz-card" style="text-align:center">
+              <div style="font-size:36px;margin-bottom:12px">🎯</div>
+              <h2 style="font-size:20px;font-weight:900;margin-bottom:8px">还没有已掌握的词</h2>
+              <p class="muted" style="font-size:14px;line-height:1.5">先去学习页标记掌握一些单词，<br>再来测验吧。</p>
+            </div>`;
+            return;
+          }
+          if(!state.quizCategories){
+            state.quizCategories=new Set([...allCatData.keys()].filter(c=>allCatData.get(c).known>0));
+          }
+          const selCount=[...state.quizCategories].reduce((s,c)=>s+(allCatData.get(c)?.known||0),0);
+          const canStart=selCount>=4;
+          let listHtml='';
+          sectData.forEach((cm,sec)=>{
+            const cats=[];
+            cm.forEach((info,cat)=>{if(info.known>0) cats.push({cat,...info});});
+            if(!cats.length) return;
+            listHtml+=`<div class="list-card"><div class="section-header">${sec}</div>`;
+            cats.forEach(({cat,emoji,total,known})=>{
+              const chk=state.quizCategories.has(cat);
+              listHtml+=`<div class="quiz-cat-row${chk?' checked':''}" data-cat="${cat}">
+                <span class="quiz-cat-name">${emoji} ${cat}</span>
+                <span class="quiz-cat-stat">${known}/${total}</span>
+                <span class="quiz-cat-cb">${chk?'✓':''}</span>
+              </div>`;
+            });
+            listHtml+='</div>';
+          });
+          els.quizPanel.innerHTML=`
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:4px 2px 12px">
+              <div>
+                <div style="font-size:18px;font-weight:900">🎯 测验设置</div>
+                <p class="muted" style="font-size:12px;margin-top:2px">可多选分类出题</p>
+              </div>
+              <div style="display:flex;gap:6px">
+                <button class="small-btn" id="quizSelAllBtn" style="padding:7px 12px;font-size:12px">全选</button>
+                <button class="small-btn" id="quizClearBtn" style="padding:7px 12px;font-size:12px;background:#e2e2e6;color:var(--ink)">清除</button>
+              </div>
+            </div>
+            ${listHtml}
+            <div style="padding:14px 2px 4px;display:flex;align-items:center;justify-content:space-between">
+              <div style="font-size:22px;font-weight:950">${selCount}<span style="font-size:13px;font-weight:600;color:var(--muted)"> 词可用</span></div>
+              <button class="small-btn" id="startQuizBtn" style="${canStart?'':'opacity:.4;pointer-events:none'}">
+                ${canStart?'开始测验 →':`再选 ${4-selCount} 个`}
+              </button>
+            </div>`;
+          els.quizPanel.querySelectorAll('.quiz-cat-row').forEach(row=>{
+            row.onclick=()=>{
+              const cat=row.dataset.cat;
+              if(state.quizCategories.has(cat)) state.quizCategories.delete(cat);
+              else state.quizCategories.add(cat);
+              renderQuiz();
+            };
+          });
+          $('quizSelAllBtn').onclick=()=>{
+            allCatData.forEach((info,cat)=>{if(info.known>0) state.quizCategories.add(cat);});
+            renderQuiz();
+          };
+          $('quizClearBtn').onclick=()=>{state.quizCategories.clear();renderQuiz();};
+          if(canStart) $('startQuizBtn').onclick=startQuiz;
+          return;
         }
         const q=state.quiz.items[state.quiz.q];
         const options=state.quiz.options;
@@ -968,7 +1098,7 @@
           }).join('')}
           ${state.quiz.locked?'<button class="small-btn" id="nextQuizBtn">下一题 →</button>':''}
         </div>`;
-        els.quizPanel.querySelectorAll('.option[data-id]').forEach(btn => {
+        els.quizPanel.querySelectorAll('.option[data-id]').forEach(btn=>{
           btn.onclick=()=>answerQuiz(btn.dataset.id);
         });
         const nq=$('nextQuizBtn');
@@ -981,22 +1111,93 @@
       }
       function render() { renderLearn(); renderCategory(); renderKnown(); renderQuiz(); renderTabs(); }
 
+      // ── Cloud sync ────────────────────────────────────────────────────
+      function openSyncModal() {
+        const modal = document.getElementById('syncModal');
+        if (!modal) return;
+        if (state.sync.user) {
+          document.getElementById('syncLoginView').style.display='none';
+          document.getElementById('syncLoggedView').style.display='';
+          document.getElementById('syncUserLabel').textContent=state.sync.user;
+          document.getElementById('syncStatusText').textContent=`${state.known.size} 词已掌握`;
+        } else {
+          document.getElementById('syncLoginView').style.display='';
+          document.getElementById('syncLoggedView').style.display='none';
+          document.getElementById('syncPwInput').value='';
+        }
+        modal.classList.add('open');
+        if (!state.sync.user) setTimeout(()=>document.getElementById('syncPwInput')?.focus(),320);
+      }
+      function closeSyncModal() { document.getElementById('syncModal')?.classList.remove('open'); }
+      async function syncPush() {
+        if (!SYNC_URL || !state.sync.user) return;
+        fetch(`${SYNC_URL}/progress?lang=${state.lang}`, {
+          method:'PUT',
+          headers:{Authorization:`Bearer ${state.sync.pw}`,'Content-Type':'application/json'},
+          body:JSON.stringify({lastIndex:state.index,knownIds:[...state.known]})
+        }).catch(()=>{});
+      }
+      async function syncPull() {
+        if (!SYNC_URL || !state.sync.user) return;
+        const r = await fetch(`${SYNC_URL}/progress?lang=${state.lang}`,{headers:{Authorization:`Bearer ${state.sync.pw}`}});
+        if (!r.ok) return;
+        const data = await r.json();
+        let changed=false;
+        (data.knownIds||[]).forEach(id=>{if(!state.known.has(id)){state.known.add(id);changed=true;}});
+        if (changed){saveProgress();renderLearn();renderCategory();renderKnown();renderTabs();}
+      }
+      async function doLogin(pw) {
+        if (!SYNC_URL) { showToast('请先配置 SYNC_URL'); return; }
+        if (!pw) { showToast('请输入密码'); return; }
+        const btn=document.getElementById('syncLoginBtn');
+        if (btn){btn.disabled=true;btn.textContent='连接中…';}
+        try {
+          const r=await fetch(`${SYNC_URL}/progress?lang=${state.lang}`,{headers:{Authorization:`Bearer ${pw}`}});
+          if (r.status===401){showToast('密码错误');return;}
+          if (!r.ok){showToast('连接失败');return;}
+          const data=await r.json();
+          state.sync={user:pw,pw};
+          localStorage.setItem('vocab-sync-pw', pw);
+          closeSyncModal();
+          let changed=false;
+          (data.knownIds||[]).forEach(id=>{if(!state.known.has(id)){state.known.add(id);changed=true;}});
+          if (changed){saveProgress();renderCategory();renderKnown();renderTabs();}
+          await syncPush();
+          showToast(`✓ 已同步（${state.known.size} 词已掌握）`);
+          renderLearn();
+        } catch {showToast('网络错误，请重试');}
+        finally {if(btn){btn.disabled=false;btn.textContent='登录并同步';}}
+      }
+
       // Events
       els.frBtn.onclick  = ()=>setLang('fr');
       els.deBtn.onclick  = ()=>setLang('de');
+      els.skipKnownBtn.classList.toggle('active', state.skipKnown);
+      els.skipKnownBtn.onclick = () => {
+        state.skipKnown = !state.skipKnown;
+        localStorage.setItem('vocab-skip-known', state.skipKnown);
+        els.skipKnownBtn.classList.toggle('active', state.skipKnown);
+      };
+      els.langSubtitle.onclick = openSyncModal;
+      document.getElementById('syncModal')?.addEventListener('click',e=>{if(e.target===document.getElementById('syncModal'))closeSyncModal();});
+      document.getElementById('syncClose')?.addEventListener('click',closeSyncModal);
+      document.getElementById('syncCancelBtn')?.addEventListener('click',closeSyncModal);
+      document.getElementById('syncLoginBtn')?.addEventListener('click',()=>doLogin((document.getElementById('syncPwInput')?.value||'').trim()));
+      document.getElementById('syncPwInput')?.addEventListener('keydown',e=>{if(e.key==='Enter')doLogin((document.getElementById('syncPwInput')?.value||'').trim());});
+      document.getElementById('syncLogoutBtn')?.addEventListener('click',()=>{state.sync={user:null,pw:null};localStorage.removeItem('vocab-sync-pw');closeSyncModal();renderLearn();showToast('已退出登录');});
+      document.getElementById('syncNowBtn')?.addEventListener('click',async()=>{closeSyncModal();showToast('正在同步…');await syncPull();await syncPush();showToast(`✓ 已同步（${state.known.size} 词）`);renderLearn();});
       els.prevBtn.onclick = ()=>go(-1);
       els.nextBtn.onclick = ()=>go(1);
       els.speakBtn.onclick = ()=>speak(target());
       els.knownBtn.onclick = () => {
         const it=item(), wasKnown=state.known.has(it.id);
-        if(wasKnown){ state.known.delete(it.id); }
+        if(wasKnown){ state.known.delete(it.id); saveProgress(); syncPush(); renderLearn(); renderCategory(); renderKnown(); renderTabs(); }
         else {
           state.known.add(it.id);
-          els.knownBtn.classList.add('bump');
-          setTimeout(()=>els.knownBtn.classList.remove('bump'),220);
           launchConfetti();
+          saveProgress(); syncPush(); renderCategory(); renderKnown(); renderTabs();
+          go(1);
         }
-        saveProgress(); renderLearn(); renderCategory(); renderKnown(); renderTabs();
       };
       document.querySelectorAll('.tab').forEach(b => b.onclick = () => {
         const prev = state.tab;
@@ -1107,6 +1308,22 @@
 
       loadProgress();
       preloadAudio(VOCAB[state.index]);
+      const _savedPw = localStorage.getItem('vocab-sync-pw');
+      if (_savedPw && SYNC_URL) {
+        state.sync = { user: _savedPw, pw: _savedPw };
+        (async () => {
+          try {
+            const _r = await fetch(`${SYNC_URL}/progress?lang=${state.lang}`, { headers: { Authorization: `Bearer ${_savedPw}` } });
+            if (_r.status === 401) { state.sync={user:null,pw:null}; localStorage.removeItem('vocab-sync-pw'); renderLearn(); return; }
+            if (!_r.ok) return;
+            const _d = await _r.json();
+            let _changed = false;
+            (_d.knownIds||[]).forEach(id=>{ if(!state.known.has(id)){state.known.add(id);_changed=true;} });
+            if (_changed) { saveProgress(); renderLearn(); renderCategory(); renderKnown(); renderTabs(); }
+            syncPush();
+          } catch {}
+        })();
+      }
       render();
     }
   </script>
