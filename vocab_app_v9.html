@@ -222,6 +222,13 @@
     .option:active  { background:#f8f8f7; transform:scale(.99); }
     .option.correct { border-color:#4ade80; background:#f0fdf4; color:#15803d; }
     .option.wrong   { border-color:#fca5a5; background:#fef2f2; color:#b91c1c; }
+    .option-hint { display:block; font-size:11px; font-weight:600; opacity:.7; margin-top:4px; }
+    .quiz-count-btn {
+      border:1.5px solid var(--line); border-radius:10px; padding:7px 11px;
+      background:#fff; color:var(--muted); font-size:14px; font-weight:700;
+      cursor:pointer; transition:background .1s, border-color .1s, color .1s; flex:0 0 auto;
+    }
+    .quiz-count-btn.qcb-active { background:var(--ink); color:#fff; border-color:var(--ink); }
     .small-btn {
       border:0; border-radius:13px; padding:13px 20px;
       background:var(--ink); color:#fff; font-weight:800; font-size:15px;
@@ -572,7 +579,7 @@
     }
 
     function setupApp(initLang) {
-      const state = { lang:initLang, index:0, known:new Set(), tab:'learn', quiz:null, skipKnown:localStorage.getItem('vocab-skip-known')!=='false', quizCategories:null, sync:{user:null,pw:null} };
+      const state = { lang:initLang, index:0, known:new Set(), tab:'learn', quiz:null, skipKnown:localStorage.getItem('vocab-skip-known')!=='false', quizCategories:null, quizCount:10, sync:{user:null,pw:null} };
       const $ = id => document.getElementById(id);
       const els = {};
       ['langSubtitle','frBtn','deBtn','skipKnownBtn','progressLabel','indexLabel','progressBar',
@@ -655,6 +662,25 @@
           if (path) {
             audio.src = path; audio.currentTime = 0;
             audio.onended = () => { if (token === playToken) setTimeout(playNext, 600); };
+            audio.play().catch(() => { speakTTS(it[state.lang]); setTimeout(playNext, 2000); });
+          } else {
+            speakTTS(it[state.lang]); setTimeout(playNext, 2000);
+          }
+        }
+        playNext();
+      }
+      function autoPlayThriceItem(it) {
+        const token = ++playToken;
+        let count = 0;
+        const path = it.audio && it.audio[state.lang];
+        const audio = $('card-audio');
+        if (path) { audio.src = path; audio.load(); }
+        function playNext() {
+          if (token !== playToken || count >= 3) return;
+          count++;
+          if (path) {
+            audio.currentTime = 0;
+            audio.onended = () => { if (token === playToken) setTimeout(playNext, 500); };
             audio.play().catch(() => { speakTTS(it[state.lang]); setTimeout(playNext, 2000); });
           } else {
             speakTTS(it[state.lang]); setTimeout(playNext, 2000);
@@ -983,16 +1009,24 @@
         const cats = state.quizCategories || new Set(VOCAB.map(v=>v.category));
         const pool = VOCAB.filter(v=>state.known.has(v.id)&&cats.has(v.category));
         if(pool.length<4){ showToast('所选分类至少需要 4 个已掌握单词'); return; }
-        const items = shuffle(pool).slice(0,Math.min(10,pool.length));
+        const n = Math.min(Math.max(state.quizCount||10,1), pool.length);
+        const items = shuffle(pool).slice(0,n);
         state.quiz = { items, options:quizOptions(items[0]), q:0, locked:false, selected:null, score:0 };
         renderQuiz();
       }
       function answerQuiz(choiceId) {
-        if(!state.quiz||state.quiz.locked) return;
+        if(!state.quiz) return;
+        if(state.quiz.locked) {
+          const it = state.quiz.options.find(o=>o.id===choiceId);
+          if(it) autoPlayThriceItem(it);
+          return;
+        }
         const correct = state.quiz.items[state.quiz.q];
         state.quiz.locked=true; state.quiz.selected=choiceId;
-        if(choiceId===correct.id){ state.quiz.score++; speakItem(correct); launchConfetti(); }
+        const isCorrect = choiceId===correct.id;
+        if(isCorrect) { state.quiz.score++; launchConfetti(); }
         renderQuiz();
+        if(isCorrect) autoPlayThriceItem(correct);
       }
       function nextQuiz() {
         if(!state.quiz) return;
@@ -1039,6 +1073,7 @@
           }
           const selCount=[...state.quizCategories].reduce((s,c)=>s+(allCatData.get(c)?.known||0),0);
           const canStart=selCount>=4;
+          const effectiveCount=Math.min(Math.max(state.quizCount||10,1),selCount||1);
           let listHtml='';
           sectData.forEach((cm,sec)=>{
             const cats=[];
@@ -1056,23 +1091,29 @@
             listHtml+='</div>';
           });
           els.quizPanel.innerHTML=`
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:4px 2px 12px">
-              <div>
-                <div style="font-size:18px;font-weight:900">🎯 测验设置</div>
-                <p class="muted" style="font-size:12px;margin-top:2px">可多选分类出题</p>
+            <div style="padding:4px 2px 10px">
+              <div style="font-size:18px;font-weight:900">🎯 测验设置</div>
+              <p class="muted" style="font-size:12px;margin-top:2px">可多选分类出题</p>
+            </div>
+            <div style="background:#fff;border-radius:16px;padding:14px 16px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.04),0 6px 20px rgba(0,0,0,.06)">
+              <div style="font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">题目数量</div>
+              <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+                ${[10,20,30,40,50].map(n=>`<button class="quiz-count-btn${(state.quizCount||10)===n?' qcb-active':''}" data-n="${n}">${n}</button>`).join('')}
+                <div style="display:flex;gap:6px;flex:1;align-items:center;min-width:100px">
+                  <input id="quizCountInput" type="number" min="1" max="${selCount||1}" value="${effectiveCount}"
+                    style="flex:1;min-width:44px;border:1.5px solid var(--line);border-radius:10px;padding:7px 6px;font-size:15px;font-weight:700;text-align:center;color:var(--ink);background:#fff;outline:none;-webkit-appearance:none" />
+                  <button id="startQuizBtn" style="border:0;border-radius:10px;padding:8px 16px;background:${canStart?'var(--ink)':'#c7c7cc'};color:#fff;font-weight:800;font-size:14px;cursor:${canStart?'pointer':'default'};white-space:nowrap;flex:0 0 auto">开始 →</button>
+                </div>
               </div>
+            </div>
+            <div style="padding:0 2px 12px;display:flex;align-items:center;justify-content:space-between">
+              <div style="font-size:22px;font-weight:950">${selCount}<span style="font-size:13px;font-weight:600;color:var(--muted)"> 词可用</span></div>
               <div style="display:flex;gap:6px">
                 <button class="small-btn" id="quizSelAllBtn" style="padding:7px 12px;font-size:12px">全选</button>
                 <button class="small-btn" id="quizClearBtn" style="padding:7px 12px;font-size:12px;background:#e2e2e6;color:var(--ink)">清除</button>
               </div>
             </div>
-            ${listHtml}
-            <div style="padding:14px 2px 4px;display:flex;align-items:center;justify-content:space-between">
-              <div style="font-size:22px;font-weight:950">${selCount}<span style="font-size:13px;font-weight:600;color:var(--muted)"> 词可用</span></div>
-              <button class="small-btn" id="startQuizBtn" style="${canStart?'':'opacity:.4;pointer-events:none'}">
-                ${canStart?'开始测验 →':`再选 ${4-selCount} 个`}
-              </button>
-            </div>`;
+            ${listHtml}`;
           els.quizPanel.querySelectorAll('.quiz-cat-row').forEach(row=>{
             row.onclick=()=>{
               const cat=row.dataset.cat;
@@ -1087,6 +1128,21 @@
           };
           $('quizClearBtn').onclick=()=>{state.quizCategories.clear();renderQuiz();};
           if(canStart) $('startQuizBtn').onclick=startQuiz;
+          els.quizPanel.querySelectorAll('.quiz-count-btn').forEach(btn=>{
+            btn.onclick=()=>{
+              const n=parseInt(btn.dataset.n);
+              state.quizCount=Math.min(n,selCount||1);
+              renderQuiz();
+            };
+          });
+          const inp=$('quizCountInput');
+          inp.oninput=()=>{
+            let v=parseInt(inp.value)||1;
+            if(v<1) v=1;
+            if(v>selCount) { v=selCount; inp.value=v; }
+            state.quizCount=v;
+          };
+          inp.onblur=()=>renderQuiz();
           return;
         }
         const q=state.quiz.items[state.quiz.q];
@@ -1101,7 +1157,8 @@
             let cls='option';
             if(state.quiz.locked&&o.id===correctId) cls+=' correct';
             if(state.quiz.locked&&o.id===state.quiz.selected&&o.id!==correctId) cls+=' wrong';
-            return `<button class="${cls}" data-id="${o.id}">${o[state.lang]}</button>`;
+            const hint=state.quiz.locked?`<span class="option-hint">${o.zh_cn} · ${o.en}</span>`:'';
+            return `<button class="${cls}" data-id="${o.id}">${o[state.lang]}${hint}</button>`;
           }).join('')}
           ${state.quiz.locked?'<button class="small-btn" id="nextQuizBtn">下一题 →</button>':''}
         </div>`;
