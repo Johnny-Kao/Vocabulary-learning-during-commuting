@@ -4,6 +4,21 @@ const CORS = {
   'Access-Control-Allow-Headers': 'Authorization, Content-Type',
 };
 
+function displayName(pw) {
+  return pw.charAt(0).toUpperCase() + pw.slice(1);
+}
+
+async function getPeerInfo(env, selfPw, lang) {
+  const validUsers = (env.VALID_PASSWORDS || '').split(',').map(p => p.trim()).filter(Boolean);
+  const peer = validUsers.find(u => u !== selfPw);
+  if (!peer) return {};
+  const peerData = await env.PROGRESS_KV.get(`${peer}:${lang}`, 'json');
+  return {
+    peerName: displayName(peer),
+    peerCount: peerData?.knownIds?.length || 0,
+  };
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === 'OPTIONS') {
@@ -29,7 +44,11 @@ export default {
 
     if (request.method === 'GET') {
       const data = await env.PROGRESS_KV.get(key, 'json');
-      return new Response(JSON.stringify(data ?? { lastIndex: 0, knownIds: [] }), {
+      const peerInfo = await getPeerInfo(env, pw, lang);
+      return new Response(JSON.stringify({
+        ...(data ?? { lastIndex: 0, knownIds: [] }),
+        ...peerInfo,
+      }), {
         headers: { ...CORS, 'Content-Type': 'application/json' },
       });
     }
@@ -41,7 +60,8 @@ export default {
         knownIds: Array.isArray(body.knownIds) ? body.knownIds : [],
         updatedAt: new Date().toISOString(),
       }));
-      return new Response(JSON.stringify({ ok: true }), {
+      const peerInfo = await getPeerInfo(env, pw, lang);
+      return new Response(JSON.stringify({ ok: true, ...peerInfo }), {
         headers: { ...CORS, 'Content-Type': 'application/json' },
       });
     }

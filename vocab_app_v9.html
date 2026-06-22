@@ -442,6 +442,7 @@
               <span class="prog-right" id="indexLabel">1 / ${VOCAB.length}</span>
             </div>
             <div class="bar"><i id="progressBar"></i></div>
+            <div id="peerLabel" style="font-size:11px;color:var(--muted);font-weight:600;margin-top:5px;min-height:14px"></div>
           </div>
 
           <div id="learnPanel" class="panel active">
@@ -579,10 +580,10 @@
     }
 
     function setupApp(initLang) {
-      const state = { lang:initLang, index:0, known:new Set(), tab:'learn', quiz:null, skipKnown:localStorage.getItem('vocab-skip-known')!=='false', quizCategories:null, quizCount:10, sync:{user:null,pw:null} };
+      const state = { lang:initLang, index:0, known:new Set(), tab:'learn', quiz:null, skipKnown:localStorage.getItem('vocab-skip-known')!=='false', quizCategories:null, quizCount:10, sync:{user:null,pw:null,peerName:null,peerCount:0} };
       const $ = id => document.getElementById(id);
       const els = {};
-      ['langSubtitle','frBtn','deBtn','skipKnownBtn','progressLabel','indexLabel','progressBar',
+      ['langSubtitle','frBtn','deBtn','skipKnownBtn','progressLabel','indexLabel','progressBar','peerLabel',
        'categoryLabel','cardCounter','zhText','enText','targetLabel','targetText',
        'speakBtn','knownBtn','prevBtn','nextBtn',
        'learnPanel','categoryPanel','knownPanel','quizPanel','mainCard']
@@ -896,6 +897,9 @@
         els.indexLabel.textContent    = `${state.index+1} / ${VOCAB.length}`;
         els.progressLabel.innerHTML   = `<b>${state.known.size}</b> / ${VOCAB.length} 已掌握`;
         els.progressBar.style.width   = `${Math.round(state.known.size/VOCAB.length*100)}%`;
+        els.peerLabel.innerHTML = state.sync.peerName
+          ? `${state.sync.peerName} 已背诵 <b style="color:var(--ink-2)">${state.sync.peerCount}</b> 个单字`
+          : '';
         els.zhText.textContent     = it.zh_cn;
         els.enText.textContent     = it.en;
         els.targetLabel.textContent = langLabel().toUpperCase();
@@ -1148,9 +1152,13 @@
         const q=state.quiz.items[state.quiz.q];
         const options=state.quiz.options;
         const correctId=q.id;
+        const answered=state.quiz.locked?state.quiz.q+1:state.quiz.q;
+        const wrong=answered-state.quiz.score;
         els.quizPanel.innerHTML=`<div class="quiz-card">
-          <div style="font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">${state.quiz.q+1} / ${state.quiz.items.length}</div>
-          <div class="quiz-q">${q.zh_cn}</div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px">
+            <div class="quiz-q" style="flex:1">${q.zh_cn}</div>
+            <div style="font-size:22px;font-weight:900;color:var(--muted);flex:0 0 auto;line-height:1.1;padding-top:4px">${state.quiz.q+1}<span style="font-size:14px;font-weight:700"> / ${state.quiz.items.length}</span></div>
+          </div>
           <div class="quiz-sub">${q.en}</div>
           <p style="font-size:12px;color:var(--muted);font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:.08em">选择正确的 ${langLabel()}</p>
           ${options.map(o=>{
@@ -1161,6 +1169,10 @@
             return `<button class="${cls}" data-id="${o.id}">${o[state.lang]}${hint}</button>`;
           }).join('')}
           ${state.quiz.locked?'<button class="small-btn" id="nextQuizBtn">下一题 →</button>':''}
+        </div>
+        <div style="display:flex;gap:20px;padding:10px 4px 0;font-size:13px;font-weight:800">
+          <span style="color:var(--ok)">✓ ${state.quiz.score} 正确</span>
+          <span style="color:#ef4444">✗ ${wrong} 错误</span>
         </div>`;
         els.quizPanel.querySelectorAll('.option[data-id]').forEach(btn=>{
           btn.onclick=()=>answerQuiz(btn.dataset.id);
@@ -1199,6 +1211,12 @@
           method:'PUT',
           headers:{Authorization:`Bearer ${state.sync.pw}`,'Content-Type':'application/json'},
           body:JSON.stringify({lastIndex:state.index,knownIds:[...state.known]})
+        }).then(r=>r.ok?r.json():null).then(d=>{
+          if(d&&d.peerName!==undefined){
+            state.sync.peerName=d.peerName||null;
+            state.sync.peerCount=d.peerCount||0;
+            renderLearn();
+          }
         }).catch(()=>{});
       }
       async function syncPull() {
@@ -1206,9 +1224,11 @@
         const r = await fetch(`${SYNC_URL}/progress?lang=${state.lang}`,{headers:{Authorization:`Bearer ${state.sync.pw}`}});
         if (!r.ok) return;
         const data = await r.json();
+        if(data.peerName!==undefined){state.sync.peerName=data.peerName||null;state.sync.peerCount=data.peerCount||0;}
         let changed=false;
         (data.knownIds||[]).forEach(id=>{if(!state.known.has(id)){state.known.add(id);changed=true;}});
         if (changed){saveProgress();renderLearn();renderCategory();renderKnown();renderTabs();}
+        else renderLearn();
       }
       async function doLogin(pw) {
         if (!SYNC_URL) { showToast('请先配置 SYNC_URL'); return; }
@@ -1220,7 +1240,7 @@
           if (r.status===401){showToast('密码错误');return;}
           if (!r.ok){showToast('连接失败');return;}
           const data=await r.json();
-          state.sync={user:pw,pw};
+          state.sync={user:pw,pw,peerName:data.peerName||null,peerCount:data.peerCount||0};
           localStorage.setItem('vocab-sync-pw', pw);
           closeSyncModal();
           let changed=false;
@@ -1374,16 +1394,18 @@
       preloadAudio(VOCAB[state.index]);
       const _savedPw = localStorage.getItem('vocab-sync-pw');
       if (_savedPw && SYNC_URL) {
-        state.sync = { user: _savedPw, pw: _savedPw };
+        state.sync = { user: _savedPw, pw: _savedPw, peerName: null, peerCount: 0 };
         (async () => {
           try {
             const _r = await fetch(`${SYNC_URL}/progress?lang=${state.lang}`, { headers: { Authorization: `Bearer ${_savedPw}` } });
-            if (_r.status === 401) { state.sync={user:null,pw:null}; localStorage.removeItem('vocab-sync-pw'); renderLearn(); return; }
+            if (_r.status === 401) { state.sync={user:null,pw:null,peerName:null,peerCount:0}; localStorage.removeItem('vocab-sync-pw'); renderLearn(); return; }
             if (!_r.ok) return;
             const _d = await _r.json();
+            if(_d.peerName!==undefined){state.sync.peerName=_d.peerName||null;state.sync.peerCount=_d.peerCount||0;}
             let _changed = false;
             (_d.knownIds||[]).forEach(id=>{ if(!state.known.has(id)){state.known.add(id);_changed=true;} });
             if (_changed) { saveProgress(); renderLearn(); renderCategory(); renderKnown(); renderTabs(); }
+            else renderLearn();
             syncPush();
           } catch {}
         })();
