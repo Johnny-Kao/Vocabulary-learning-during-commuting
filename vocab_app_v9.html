@@ -580,7 +580,7 @@
     }
 
     function setupApp(initLang) {
-      const state = { lang:initLang, index:0, known:new Set(), tab:'learn', quiz:null, skipKnown:localStorage.getItem('vocab-skip-known')!=='false', quizCategories:null, quizCount:10, sync:{user:null,pw:null,peerName:null,peerCount:0} };
+      const state = { lang:initLang, index:0, known:new Set(), tab:'learn', quiz:null, skipKnown:localStorage.getItem('vocab-skip-known')!=='false', quizCategories:null, quizCount:10, sync:{user:null,pw:null,peerName:null,peerCount:0,peerLang:null} };
       const $ = id => document.getElementById(id);
       const els = {};
       ['langSubtitle','frBtn','deBtn','skipKnownBtn','progressLabel','indexLabel','progressBar','peerLabel',
@@ -897,8 +897,9 @@
         els.indexLabel.textContent    = `${state.index+1} / ${VOCAB.length}`;
         els.progressLabel.innerHTML   = `<b>${state.known.size}</b> / ${VOCAB.length} 已掌握`;
         els.progressBar.style.width   = `${Math.round(state.known.size/VOCAB.length*100)}%`;
+        const _peerLangLabel = state.sync.peerLang==='de'?'德文':'法文';
         els.peerLabel.innerHTML = state.sync.peerName
-          ? `${state.sync.peerName} 已背诵 <b style="color:var(--ink-2)">${state.sync.peerCount}</b> 个单字`
+          ? `${state.sync.peerName} 已背诵 <b style="color:var(--ink-2)">${state.sync.peerCount}</b> 个${_peerLangLabel}单字`
           : '';
         els.zhText.textContent     = it.zh_cn;
         els.enText.textContent     = it.en;
@@ -1215,6 +1216,7 @@
           if(d&&d.peerName!==undefined){
             state.sync.peerName=d.peerName||null;
             state.sync.peerCount=d.peerCount||0;
+            state.sync.peerLang=d.peerLang||null;
             renderLearn();
           }
         }).catch(()=>{});
@@ -1224,7 +1226,7 @@
         const r = await fetch(`${SYNC_URL}/progress?lang=${state.lang}`,{headers:{Authorization:`Bearer ${state.sync.pw}`}});
         if (!r.ok) return;
         const data = await r.json();
-        if(data.peerName!==undefined){state.sync.peerName=data.peerName||null;state.sync.peerCount=data.peerCount||0;}
+        if(data.peerName!==undefined){state.sync.peerName=data.peerName||null;state.sync.peerCount=data.peerCount||0;state.sync.peerLang=data.peerLang||null;}
         let changed=false;
         (data.knownIds||[]).forEach(id=>{if(!state.known.has(id)){state.known.add(id);changed=true;}});
         if (changed){saveProgress();renderLearn();renderCategory();renderKnown();renderTabs();}
@@ -1240,7 +1242,7 @@
           if (r.status===401){showToast('密码错误');return;}
           if (!r.ok){showToast('连接失败');return;}
           const data=await r.json();
-          state.sync={user:pw,pw,peerName:data.peerName||null,peerCount:data.peerCount||0};
+          state.sync={user:pw,pw,peerName:data.peerName||null,peerCount:data.peerCount||0,peerLang:data.peerLang||null};
           localStorage.setItem('vocab-sync-pw', pw);
           closeSyncModal();
           let changed=false;
@@ -1401,7 +1403,7 @@
             if (_r.status === 401) { state.sync={user:null,pw:null,peerName:null,peerCount:0}; localStorage.removeItem('vocab-sync-pw'); renderLearn(); return; }
             if (!_r.ok) return;
             const _d = await _r.json();
-            if(_d.peerName!==undefined){state.sync.peerName=_d.peerName||null;state.sync.peerCount=_d.peerCount||0;}
+            if(_d.peerName!==undefined){state.sync.peerName=_d.peerName||null;state.sync.peerCount=_d.peerCount||0;state.sync.peerLang=_d.peerLang||null;}
             let _changed = false;
             (_d.knownIds||[]).forEach(id=>{ if(!state.known.has(id)){state.known.add(id);_changed=true;} });
             if (_changed) { saveProgress(); renderLearn(); renderCategory(); renderKnown(); renderTabs(); }

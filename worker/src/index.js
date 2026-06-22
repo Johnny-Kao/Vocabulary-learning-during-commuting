@@ -12,10 +12,12 @@ async function getPeerInfo(env, selfPw, lang) {
   const validUsers = (env.VALID_PASSWORDS || '').split(',').map(p => p.trim()).filter(Boolean);
   const peer = validUsers.find(u => u !== selfPw);
   if (!peer) return {};
-  const peerData = await env.PROGRESS_KV.get(`${peer}:${lang}`, 'json');
+  const peerLang = lang === 'fr' ? 'de' : 'fr';
+  const peerData = await env.PROGRESS_KV.get(`${peer}:${peerLang}`, 'json');
   return {
     peerName: displayName(peer),
     peerCount: peerData?.knownIds?.length || 0,
+    peerLang,
   };
 }
 
